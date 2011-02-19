@@ -83,11 +83,11 @@
 %\setlength{\itemsep}{0pt}
 
 % How to nunmber different objects
-\AtBeginDocument{
+%\AtBeginDocument{
  \numberwithin{equation}{section}
  \numberwithin{figure}{section}
  \numberwithin{table}{section}
-}
+%}
 
 % User preamble commands
 \renewcommand{\author}[1]{\gdef\@author{#1}}

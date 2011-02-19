@@ -1,0 +1,59 @@
+\documentclass[doctorate,a4paper]{chalmers-thesis}
+\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
+
+\usepackage{blindtext} % Package used to put in placeholder text. Remove it.
+
+\title{The Title of Your Thesis which might be very long}
+\subtitle{And Perhaps a Subtitle}
+\author{Some Author\and Other Author}
+\thesisin{Solid and Structural Mechanics}
+\department{Department of Applied Mechanics}
+\division{Division of Solid Mechanics}
+\reportno{2011:01}
+\ISBN{123-21332-13423-123}
+\copyrightyear{2011}
+
+\opponent{
+Dr. Alban\\
+Department of Pop\\
+University of Somewhere\\
+Nigeria
+}
+\oppositiondate{10.00 am, 30\textsuperscript{th} May, 2011 in HA2 Hörsalsvägen 4, Göteborg}
+
+% You should scale the figure according to textwidth and or paperheight.
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cover.png}}
+\covercaption{Some explanation}
+
+\firstabstract{\blindtext}
+\secondabstract{swedish}{\blindtext}
+\keywords{Some stuff, More stuff, Stuff}
+
+\preface{\blindtext}
+\acknowledgements{\blindtext}
+\dedication{\textit{to my dear mother.}}
+\paperwork{\blindtext}
+
+\bibliography{mybib}
+
+\begin{document}
+\maketitle
+%\makethesisdefence % Prints the thesis defence paper instead of the title pages.
+
+\part{Extended Summary}
+
+\subfile{Introduction}
+
+\nocite{*} % Causes everything in bibliography to be printed
+\printbibliography
+
+\part{Appended Papers A--B}
+
+% \paper{Paper Title}{Citation}
+\paper{A stude of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
+%\includepdf[pages=-]{papera.pdf}
+
+\paper{Assessment of acceleration modeling for fluid-filled porous media subjected to dynamic loading}{\blindtext}
+%\includepdf[pages=-]{paperb.pdf}
+
+\end{document}
