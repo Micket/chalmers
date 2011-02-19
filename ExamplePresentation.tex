@@ -1,0 +1,49 @@
+\documentclass[11pt,mathserif]{beamer} % mathserif for normal math fonts.
+\usepackage[utf8]{inputenc}
+\usepackage[swedish,english]{babel}
+\usepackage{amsmath,mathtools}
+\usepackage{calc}
+
+% The Chalmers theme:
+\usetheme[titleflower=true]{chalmers} % titleflower = true or false
+\title{Some long title about stuff}
+\subtitle{And something more} % optional
+\author[Some Author et al.]{Some Author\and Another Author} % [short author (optional)]{many authors}
+\institute{Chalmers University of Technology}
+\titlepageextra{Some conference} % Optional extra info, appears before date on title page
+\footer{\insertshortauthor\ Some conference} % optional, manually sets footer (default is short author)
+%\footer{Something completely different} % but it can of course be anything.
+\titlepagelogofile{figures/Avancez} % File name to the file you want to include.
+%\titlepagelogo{\tikz{\draw(0,0) circle (1);}} % or draw anything for a logo
+
+\begin{document}
+
+\section{Title page} % Sections are shown at the bottom left. There is also links in many pdf-readers
+\begin{frame}[plain]
+ \titlepage
+\end{frame}
+
+\section{Another section}
+\begin{frame}
+ \frametitle{First title}
+ \framesubtitle{With subtitle}
+ Here one can write anything
+\begin{itemize}
+ \item And also some items
+ \item<1-> And more
+ \item<2-> And yet more
+\end{itemize}
+\end{frame}
+
+\subsection{With a subsection}
+\begin{frame}
+ \frametitle{Another title}
+ Here one can write anything
+\begin{itemize}
+ \item And also some items
+ \item And more
+ \item And yet more
+\end{itemize}
+\end{frame}
+
+\end{document}

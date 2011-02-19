@@ -1,0 +1,56 @@
+% This is an example on how to use the chalmers-thesis document class for a master's thesis.
+% Document should be compiled with pdflatex or lualatex
+
+\documentclass[masters,a4paper]{chalmers-thesis}
+\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x
+%\usepackage{microtype} % Magically improves typesetting for pdflatex
+\usepackage{subfiles} % Split up the contents, see Introduction.tex
+
+% Other optional packages. All are highly recommended.
+%\usepackage{mathtools} % All your math related needs
+%\usepackage{thmtools} % For theorems.
+%\usepackage{algorithms} % For algorithms.
+%\usepackage{listings} % For source code.
+%\usepackage{booktabs} % High quality tables.
+%\usepackage{siunitx} % For all your numerical values and units. 
+%\usepackage{tikz} % Draw figures with tikz. 
+%\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
+%\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
+
+\usepackage{blindtext} % Package used to put in placeholder text. Remove it.
+
+% User commands
+\title{The Title of Your Thesis which might be very long}
+\subtitle{And Perhaps a Subtitle}
+\author{Some Author\and Other Author}
+\thesisin{Solid and Structural Mechanics}
+\department{Department of Applied Mechanics}
+\division{Division of Solid Mechanics}
+\reportno{2011:01}
+\copyrightyear{2011}
+
+% You should scale the figure according to textwidth and or paperheight.
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cover.png}}
+\covercaption{Some explanation}
+
+\firstabstract{\blindtext}
+%\secondabstract{swedish}{\blindtext} % Optional
+\keywords{Some stuff, More stuff, Stuff}
+
+\preface{\blindtext} % You can use \input to put preface and acknowledgements in another document
+\acknowledgements{\blindtext}
+
+\bibliography{mybib}
+
+\begin{document}
+\maketitle
+
+\subfile{Introduction}
+%\subfile{Theory}
+%\subfile{Method}
+
+\nocite{*} % Causes everything in bibliography to be printed (should not be used in final paper)
+\printbibliography
+
+\end{document}
+
