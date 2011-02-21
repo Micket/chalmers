@@ -1,5 +1,23 @@
+% This is an example on how to use the chalmers-thesis document class for a master's thesis.
+% Document should be compiled with pdflatex or lualatex
+
+% change doctorate to 
 \documentclass[doctorate,a4paper]{chalmers-thesis}
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
+\usepackage{microtype} % Magically improves typesetting for pdflatex
+\usepackage{subfiles}
+
+% Other optional packages. All are highly recommended.
+%\usepackage{mathtools} % All your math related needs
+%\usepackage{thmtools} % For theorems.
+%\usepackage{algorithms} % For algorithms.
+%\usepackage{listings} % For source code.
+%\usepackage{booktabs} % High quality tables.
+%\usepackage{siunitx} % For all your numerical values and units. 
+%\usepackage{tikz} % Draw figures with tikz. 
+%\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
+%\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
+
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -10,7 +28,7 @@
 \department{Department of Applied Mechanics}
 \division{Division of Solid Mechanics}
 \reportno{2011:01}
-\ISBN{123-21332-13423-123}
+\ISBN{123-21332-13423-123} % Only for doctorate
 \copyrightyear{2011}
 
 \opponent{

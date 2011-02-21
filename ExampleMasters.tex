@@ -1,9 +1,10 @@
 % This is an example on how to use the chalmers-thesis document class for a master's thesis.
 % Document should be compiled with pdflatex or lualatex
 
+% For bachelor thesis, change "masters" to "bachelor".
 \documentclass[masters,a4paper]{chalmers-thesis}
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x
-%\usepackage{microtype} % Magically improves typesetting for pdflatex
+\usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Split up the contents, see Introduction.tex
 
 % Other optional packages. All are highly recommended.
@@ -43,8 +44,10 @@
 \bibliography{mybib}
 
 \begin{document}
+%\selectlanguage{swedish} % Use this if you are writing your thesis in swedish.
 \maketitle
 
+% Highly recommended to put contents into subfiles, or use \input.
 \subfile{Introduction}
 %\subfile{Theory}
 %\subfile{Method}
