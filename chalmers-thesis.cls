@@ -5,7 +5,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/01/26 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/02/22 CHALMERS Thesis class]
 
 \newif\if@bachelor
 \newif\if@masters
@@ -38,18 +38,14 @@
 
 \LoadClass[twoside]{report}
 
-\RequirePackage{tikz}
-\RequirePackage{fancyhdr}
-\RequirePackage{hyperref}
 \RequirePackage{graphicx}
-\RequirePackage{csquotes}
-\RequirePackage{biblatex}
-\RequirePackage[english]{babel}
+\RequirePackage{etoolbox}
+\RequirePackage{fancyhdr}
+\RequirePackage[top=0.1\paperheight, bottom=0.1\paperheight, left=0.1\paperwidth, right=0.1\paperwidth]{geometry}
 
-\RequirePackage{amsmath}
 %\RequirePackage[font=small,format=plain,textfont=it,up]{caption}
 
-% \RequirePackage{titlesec}
+\RequirePackage{titlesec}
 % \renewcommand{\thechapter}{\Roman{chapter}}
 % \titleformat{\chapter}[display]
 % {\bfseries\Large}
@@ -61,17 +57,10 @@
 % [\vspace{2ex}%
 % \titlerule]
 
-
-\RequirePackage[top=0.1\paperheight, bottom=0.1\paperheight, left=0.1\paperwidth, right=0.1\paperwidth]{geometry}
-
 \fancyhead{}
 \renewcommand{\headrulewidth}{0pt}
 
-\defbibheading{bibliography}[\refname]{\section*{#1}} % Sets the heading for the bibliography
-
 % The standard colors
-\definecolor{chalmers_blue}{rgb}{0, 0, 0.4}
-\definecolor{chalmers_grey}{rgb}{0.8, 0.8, 0.8}
 
 % Adjustments of floats and equations.
 %\setlength{\intextsep}{12pt} % This is what you meant to set to 12pt, not textfloatsep
@@ -82,12 +71,77 @@
 %\setlength{\belowcaptionskip}{0pt} % Actual skip = \textfloatsep + \belowcaptionskip
 %\setlength{\itemsep}{0pt}
 
-% How to nunmber different objects
-%\AtBeginDocument{
- \numberwithin{equation}{section}
- \numberwithin{figure}{section}
- \numberwithin{table}{section}
-%}
+\AtEndPreamble{
+ \@ifpackageloaded{color}{
+  \definecolor{chalmers_blue}{rgb}{0, 0, 0.4}
+  \definecolor{chalmers_grey}{rgb}{0.8, 0.8, 0.8}
+ }{}
+
+ % Check for amsmath
+ \@ifpackageloaded{amsmath}{
+  \numberwithin{equation}{section}
+  \numberwithin{figure}{section}
+  \numberwithin{table}{section}
+ }{\ClassWarning{chalmers-thesis}{Package 'amsmath' strongly recommended.}{}}
+
+ % Check and set up biblatex
+ \@ifpackageloaded{biblatex}{
+  \defbibheading{bibliography}[\refname]{\section*{#1}} % Sets the heading for the bibliography
+  }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
+
+ % Check for babel and add more translations
+ \@ifpackageloaded{babel}{
+  \addto\captionsswedish{%
+   \def\countryname{Sverige}%
+   \def\cityname{G\"oteborg}%
+   \def\telephonename{Telefon}%
+   \def\universityname{Chalmers Tekniska H\"ogskola}%
+   \def\covername{Omslag}%
+   \def\acknowledgementsname{Tacks\"agelse}%
+   \def\keywordsname{Nyckelord}%
+   \def\masterthesisname{Examensarbete}%
+   \def\bachelorthesisname{Kandidatarbete}%
+   \def\licentiatethesisname{Licentiatavhandling}%
+   \def\licentiatethesisname{Doktorsavhandling}%
+   \def\inname{i}%
+  }
+ 
+  \addto\captionsenglish{%
+   \def\countryname{Sweden}%
+   \def\cityname{G\"oteborg}%
+   \def\telephonename{Telephone}%
+   \def\universityname{Chalmers University of Technology}%
+   \def\covername{Cover}%
+   \def\acknowledgementsname{Acknowledgements}%
+   \def\keywordsname{Keywords}%
+   \def\masterthesisname{Master's thesis}%
+   \def\bachelorthesisname{Bachelor thesis}%
+   \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
+   \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
+   \def\inname{in}%
+  }
+ }{\ClassError{chalmers-thesis}{Package 'babel' required}{}}
+ 
+ % Document metadata setup
+ \@ifpackageloaded{hyperref}{
+ \renewcommand{\and}{, }
+  \hypersetup{%
+   breaklinks,%
+   pdfcreator    = \LaTeX{},%
+   pdfproducer   = \LaTeX{},%
+   bookmarksopen = true,%
+   pdfauthor     = \@author,%
+   pdftitle      = \@title,%
+   %pdfsubject    = \thesisname,%
+   pdfkeywords   = \@keywords,%
+   colorlinks = true,
+   urlcolor   = black,%
+   citecolor  = black,%
+   linkcolor  = black,%
+   filecolor  = black,%
+  }
+ }{\ClassWarning{chalmers-thesis}{Package 'hyperref' strongly recommended}{}}
+}
 
 % User preamble commands
 \renewcommand{\author}[1]{\gdef\@author{#1}}
@@ -126,41 +180,6 @@
 \postcode{SE-412 96}
 \printers{Chalmers Reproservice}
 \telephone{+46 (0)31-772 1000}
-
-% More translations for babel.
-\addto\captionsswedish{%
-  \def\countryname{Sverige}%
-  \def\cityname{G\"oteborg}%
-  \def\telephonename{Telefon}%
-  \def\universityname{Chalmers Tekniska H\"ogskola}%
-  \def\covername{Omslag}%
-  \def\acknowledgementsname{Tacks\"agelse}%
-  \def\keywordsname{Nyckelord}%
-%
-  \def\masterthesisname{Examensarbete}%
-  \def\bachelorthesisname{Kandidatarbete}%
-  \def\licentiatethesisname{Licentiatavhandling}%
-  \def\licentiatethesisname{Doktorsavhandling}%
-%
-  \def\inname{i}%
-  }
-
-\addto\captionsenglish{%
-  \def\countryname{Sweden}%
-  \def\cityname{G\"oteborg}%
-  \def\telephonename{Telephone}%
-  \def\universityname{Chalmers University of Technology}%
-  \def\covername{Cover}%
-  \def\acknowledgementsname{Acknowledgements}%
-  \def\keywordsname{Keywords}%
-%
-  \def\masterthesisname{Master's thesis}%
-  \def\bachelorthesisname{Bachelor thesis}%
-  \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
-  \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
-%
-  \def\inname{in}%
-  }
 
 % Thesis specific settings
 \if@bachelor
@@ -251,66 +270,48 @@
 \setlength{\headerheight}{0.215\paperheight}%~6.4cm in a4
 \setlength{\headeroffset}{0.125\headerheight}%~0.8cm in a4
 
-% Document metadata setup
-\hypersetup{
-  colorlinks = true,
-  urlcolor   = black,%
-  citecolor  = black,%
-  linkcolor  = black,%
-  filecolor  = black,%
-}
-\AtBeginDocument{
- {\renewcommand{\and}{, }
-  \hypersetup{%
-   breaklinks,%
-   pdfcreator    = \LaTeX{},%
-   pdfproducer   = \LaTeX{},%
-   bookmarksopen = true,%
-   pdfauthor     = \@author,%
-   pdftitle      = \@title,%
-   pdfsubject    = \thesisname,%
-   pdfkeywords   = \@keywords,%
-  }
- }
-}
-
-\newcommand{\makecoverpage}{
- \pagestyle{empty}
- \begin{tikzpicture}[remember picture,overlay]
-  \node[yshift=-\headerheight] at (current page.north west)
-   {\begin{tikzpicture}[remember picture, overlay]
-     \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0.75\paperwidth,0)
-                 .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
-                 (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
-     \titlepage@bg
-     \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
-     \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{% 3.6cm
-        figures/\titlepage@logotype
-     }};
-   \end{tikzpicture}};
- \end{tikzpicture}
- \ \vfill
- \begin{center}
-  \@ifundefined{@coverfigure}{}{\@coverfigure}
- \end{center}
- {\huge\noindent\@title\par} % title, 21
- \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
- {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor and master's)
- \vskip 1em
- {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
- \vskip 1em
- {\small\noindent\@department\\
-  \@ifundefined{@division}{}{\textit{\@division}\\}
-  \MakeUppercase{\universityname}\\
-  \cityname, \countryname\ \@copyrightyear
-  \if@bachelorormasters
-    \\ \thesisname\ \@reportno \fi
-  \par}
-
- % Second page, blank
- \newpage
- \mbox{}
-}
+% \AtEndPreamble{
+% \@ifpackageloaded{tikz}{
+% \newcommand{\makecoverpage}{
+%  % Check for tikz
+%  \pagestyle{empty}
+%  \begin{tikzpicture}[remember picture,overlay]
+%   \node[yshift=-\headerheight] at (current page.north west)
+%    {\begin{tikzpicture}[remember picture, overlay]
+%      \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0.75\paperwidth,0)
+%                  .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
+%                  (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
+%      \titlepage@bg
+%      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
+%      \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{% 3.6cm
+%         figures/\titlepage@logotype
+%      }};
+%    \end{tikzpicture}};
+%  \end{tikzpicture}
+%  \ \vfill
+%  \begin{center}
+%   \@ifundefined{@coverfigure}{}{\@coverfigure}
+%  \end{center}
+%  {\huge\noindent\@title\par} % title, 21
+%  \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
+%  {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor and master's)
+%  \vskip 1em
+%  {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
+%  \vskip 1em
+%  {\small\noindent\@department\\
+%   \@ifundefined{@division}{}{\textit{\@division}\\}
+%   \MakeUppercase{\universityname}\\
+%   \cityname, \countryname\ \@copyrightyear
+%   \if@bachelorormasters
+%     \\ \thesisname\ \@reportno \fi
+%   \par}
+% 
+%  % Second page, blank
+%  \newpage
+%  \mbox{}
+% }{
+% \newcommand{\makecoverpage}{\ClassError{chalmers-thesis}{Package 'tikz' necessary.}{Load the 'tikz' package or use the nocover option.}}
+% }
 
 \newcommand{\maketitlepage}{
  \newpage\thispagestyle{empty}

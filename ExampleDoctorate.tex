@@ -6,18 +6,19 @@
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles}
-
-% Other optional packages. All are highly recommended.
-%\usepackage{mathtools} % All your math related needs
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[]{biblatex}
+\usepackage{mathtools} % All your math related needs
+% \usepackage{tikz} % Draw figures. Required for cover page.
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
 %\usepackage{siunitx} % For all your numerical values and units. 
-%\usepackage{tikz} % Draw figures with tikz. 
 %\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -40,11 +41,11 @@ Nigeria
 \oppositiondate{10.00 am, 30\textsuperscript{th} May, 2011 in HA2 Hörsalsvägen 4, Göteborg}
 
 % You should scale the figure according to textwidth and or paperheight.
-\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cover.png}}
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover.png}}
 \covercaption{Some explanation}
 
 \firstabstract{\blindtext}
-\secondabstract{swedish}{\blindtext}
+%\secondabstract{swedish}{\blindtext}
 \keywords{Some stuff, More stuff, Stuff}
 
 \preface{\blindtext}
@@ -52,26 +53,30 @@ Nigeria
 \dedication{\textit{to my dear mother.}}
 \paperwork{\blindtext}
 
-\bibliography{mybib}
+\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}}
+
+\bibliography{ExampleBib}
 
 \begin{document}
-\maketitle
+%\maketitle
 %\makethesisdefence % Prints the thesis defence paper instead of the title pages.
 
 \part{Extended Summary}
 
-\subfile{Introduction}
+\subfile{ExampleIntroduction}
 
 \nocite{*} % Causes everything in bibliography to be printed
 \printbibliography
 
 \part{Appended Papers A--B}
 
-% \paper{Paper Title}{Citation}
-\paper{A stude of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
+% You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically
+\paper{\citetitle*{paper:A}}{\fullcite{paper:A}}
+%\paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 %\includepdf[pages=-]{papera.pdf}
 
-\paper{Assessment of acceleration modeling for fluid-filled porous media subjected to dynamic loading}{\blindtext}
+%\paper{Assessment of acceleration modeling for fluid-filled porous media subjected to dynamic loading}{\blindtext} %{\fullcite{paper:A}}
+\paper{\citetitle*{paper:B}}{\fullcite{paper:B}}
 %\includepdf[pages=-]{paperb.pdf}
 
 \end{document}
