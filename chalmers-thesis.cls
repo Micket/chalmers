@@ -38,6 +38,7 @@
 
 \LoadClass[twoside]{report}
 
+% Set up with the required packages
 \RequirePackage{graphicx}
 \RequirePackage{etoolbox}
 \RequirePackage{fancyhdr}
@@ -60,17 +61,16 @@
 \fancyhead{}
 \renewcommand{\headrulewidth}{0pt}
 
-% The standard colors
-
 % Adjustments of floats and equations.
-%\setlength{\intextsep}{12pt} % This is what you meant to set to 12pt, not textfloatsep
-%\setlength{\abovedisplayskip}{6pt}
-%\setlength{\belowdisplayskip}{6pt}
-%\setlength{\parindent}{5mm}
-%\setlength{\abovecaptionskip}{6pt}
-%\setlength{\belowcaptionskip}{0pt} % Actual skip = \textfloatsep + \belowcaptionskip
-%\setlength{\itemsep}{0pt}
+\setlength{\intextsep}{12pt}
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\parindent}{5mm}
+\setlength{\abovecaptionskip}{6pt}
+\setlength{\belowcaptionskip}{0pt} % Actual skip = \textfloatsep + \belowcaptionskip
+\setlength{\itemsep}{0pt}
 
+% Dynamic setup for user loaded packages.
 \AtEndPreamble{
  \@ifpackageloaded{color}{
   \definecolor{chalmers_blue}{rgb}{0, 0, 0.4}
@@ -263,6 +263,13 @@
 
 \noindent \@paperwork
 }
+
+% Macro for checking all required commands are set.
+\newcommand{\@checkifdefined}[1]{%
+  \@ifundefined{@#1}{\ClassError{chalmers-thesis}{User input `#1` undefined.}{}}{}%
+}
+
+%   \@ifundefined{@coverfigure}{}{\@coverfigure}
 
 % Introducing some new lengths for the front page
 \newlength{\headerheight}
