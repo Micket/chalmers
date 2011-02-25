@@ -9,11 +9,11 @@
 \newcommand{\louter}{\mathbin{\underline{\otimes}}} % Lower outer product
 
 % Tensors
-\renewcommand{\to}[1]{\text{\boldmath $#1$}} % First order tensor. Bold, cursive
-%\newcommand{\ts}[1]{\text{\boldmath $\mathrm{#1}$}} % Second order tensor. Bold, straigt
-\newcommand{\ts}[1]{\text{\boldmath $#1$}} % Second order tensor. Bold, straigt % TODO: Try \boldsymbol and \pmb
-\newcommand{\td}[1]{\text{\boldmath $\mathcal{#1}$}} % Third order tensor. Bold, caligraphy
-\newcommand{\tf}[1]{\text{\boldmath $\mathsf{#1}$}} % Fourth order tensor. Bold, sans-serif
+\renewcommand{\to}[1]{\boldsymbol #1} % First order tensor. Bold, cursive
+\newcommand{\ts}[1]{\boldsymbol \mathrm{#1}} % Second order tensor. Bold, straigt
+%\newcommand{\ts}[1]{\boldsymbol #1} % Second order tensor. Bold, cursive
+\newcommand{\td}[1]{\boldsymbol \mathcal{#1}} % Third order tensor. Bold, caligraphy
+\newcommand{\tf}[1]{\boldsymbol \mathsf{#1}} % Fourth order tensor. Bold, sans-serif
 
 \renewcommand{\vec}[1]{\underline{#1}} % Vectors
 \newcommand{\mat}[1]{\underline{#1}} % Matrices (even if they are the same, keep them seperate if you ever wish to change it.
@@ -22,19 +22,19 @@
 \newcommand{\minorT}{\mathrm{t}} % For minor transpose, \tf A^\tran
 
 % Common decorations for tensors.
-\DeclareMathOperator{\dev}{dev} % Deviatoric part
-\DeclareMathOperator{\vol}{vol} % Volumetric part
-\DeclareMathOperator{\sym}{sym} % Symmetric part
-\DeclareMathOperator{\skw}{skw} % Skew part
-\DeclareMathOperator{\sph}{sph} % Spherical part
-\DeclareMathOperator{\trial}{tr} % Trial value
-\DeclareMathOperator{\el}{e} % Elastic
-\DeclareMathOperator{\pl}{p} % Plastic
-\DeclareMathOperator{\eff}{e} % Effective value
-\DeclareMathOperator{\alg}{a} % Algorithmic value
-\DeclareMathOperator{\mean}{m} % Mean value
-\DeclareMathOperator{\red}{red} % Reduced value
-\DeclareMathOperator{\thres}{th} % Threshold value
+\newcommand{\dev}{\mathrm{dev}} % Deviatoric part
+\newcommand{\vol}{\mathrm{vol}} % Volumetric part
+\newcommand{\sym}{\mathrm{sym}} % Symmetric part
+\newcommand{\skw}{\mathrm{skw}} % Skew part
+\newcommand{\sph}{\mathrm{sph}} % Spherical part
+\newcommand{\trial}{\mathrm{tr}} % Trial value
+\newcommand{\el}{\mathrm{e}} % Elastic
+\newcommand{\pl}{\mathrm{p}} % Plastic
+\newcommand{\eff}{\mathrm{e}} % Effective value
+\newcommand{\alg}{\mathrm{a}} % Algorithmic value
+\newcommand{\mean}{\mathrm{m}} % Mean value
+\newcommand{\red}{\mathrm{red}} % Reduced value
+\newcommand{\thres}{\mathrm{th}} % Threshold value
 
 % For typing out second order base indicies conveniently
 \newcommand{\be}[1]{\to{e}_{#1}}
@@ -56,9 +56,12 @@
 \DeclareMathOperator{\Dif}{D \!}
 \DeclareMathOperator{\tr}{tr} % Trace
 
-%\newcommand{\od}[2]{\ensuremath{\frac{\partial\: #1}{\partial\: #2}}} % Partial derivatives, \ts K = \pderiv{\to x}{\to y}
-%\newcommand{\pd}[2]{\ensuremath{\frac{\mathrm{d}\: #1}{\mathrm{d} #2}}} % Total derivatives
+% ordinary derivative - analogous to the partial derivative command
+\providecommand{\od}[3][]{\ensuremath{\frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}}} % Ordinary derivatives
 
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Norm of a tensor or vector \norm A or \nornm* A
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert} % Absolute value of a scalar \abs x
-\DeclarePairedDelimiter{\mcc}{\langle}{\rangle} % McCauley bracket
+\providecommand{\op}[2]{\frac{\partial\: #1}{\partial\: #2}} % Partial derivatives, \ts K = \pderiv{\to x}{\to y}
+\providecommand{\od}[2]{\frac{\mathrm{d}\: #1}{\mathrm{d} #2}} % Total derivatives
+
+%\providecommand{\abs}{\lvert}{\rvert} % Norm of a tensor or vector \norm A or \nornm* A
+%\providecommand{\norm}{\lVert}{\rVert} % Absolute value of a scalar \abs x
+%\providecommand{\mcc}{\langle}{\rangle} % McCauley bracket

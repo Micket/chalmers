@@ -266,7 +266,7 @@
 
 % Macro for checking all required commands are set.
 \newcommand{\@checkifdefined}[1]{%
-  \@ifundefined{@#1}{\ClassError{chalmers-thesis}{User input `#1` undefined.}{}}{}%
+  \@ifundefined{@#1}{\ClassError{chalmers-thesis}{User input `#1` undefined.}{Use the \textbackslash #1{} command to set it.}}{}%
 }
 
 %   \@ifundefined{@coverfigure}{}{\@coverfigure}
@@ -277,48 +277,49 @@
 \setlength{\headerheight}{0.215\paperheight}%~6.4cm in a4
 \setlength{\headeroffset}{0.125\headerheight}%~0.8cm in a4
 
-% \AtEndPreamble{
-% \@ifpackageloaded{tikz}{
-% \newcommand{\makecoverpage}{
-%  % Check for tikz
-%  \pagestyle{empty}
-%  \begin{tikzpicture}[remember picture,overlay]
-%   \node[yshift=-\headerheight] at (current page.north west)
-%    {\begin{tikzpicture}[remember picture, overlay]
-%      \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0.75\paperwidth,0)
-%                  .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
-%                  (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
-%      \titlepage@bg
-%      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
-%      \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{% 3.6cm
-%         figures/\titlepage@logotype
-%      }};
-%    \end{tikzpicture}};
-%  \end{tikzpicture}
-%  \ \vfill
-%  \begin{center}
-%   \@ifundefined{@coverfigure}{}{\@coverfigure}
-%  \end{center}
-%  {\huge\noindent\@title\par} % title, 21
-%  \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
-%  {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor and master's)
-%  \vskip 1em
-%  {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
-%  \vskip 1em
-%  {\small\noindent\@department\\
-%   \@ifundefined{@division}{}{\textit{\@division}\\}
-%   \MakeUppercase{\universityname}\\
-%   \cityname, \countryname\ \@copyrightyear
-%   \if@bachelorormasters
-%     \\ \thesisname\ \@reportno \fi
-%   \par}
-% 
-%  % Second page, blank
-%  \newpage
-%  \mbox{}
-% }{
-% \newcommand{\makecoverpage}{\ClassError{chalmers-thesis}{Package 'tikz' necessary.}{Load the 'tikz' package or use the nocover option.}}
-% }
+\AtEndPreamble{
+\@ifpackageloaded{tikz}{
+\newcommand{\makecoverpage}{
+ \pagestyle{empty}
+ \begin{tikzpicture}[remember picture,overlay]
+  \node[yshift=-\headerheight] at (current page.north west)
+   {\begin{tikzpicture}[remember picture, overlay]
+     \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0.75\paperwidth,0)
+                 .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
+                 (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
+     \titlepage@bg
+     \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
+     \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{% 3.6cm
+        figures/\titlepage@logotype
+     }};
+   \end{tikzpicture}};
+ \end{tikzpicture}
+ \ \vfill
+ \begin{center}
+  \@ifundefined{@coverfigure}{}{\@coverfigure}
+ \end{center}
+ {\huge\noindent\@title\par} % title, 21
+ \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
+ {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor and master's)
+ \vskip 1em
+ {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
+ \vskip 1em
+ {\small\noindent\@department\\
+  \@ifundefined{@division}{}{\textit{\@division}\\}
+  \MakeUppercase{\universityname}\\
+  \cityname, \countryname\ \@copyrightyear
+  \if@bachelorormasters
+    \\ \thesisname\ \@reportno \fi
+  \par}
+
+ % Second page, blank
+ \newpage
+ \mbox{}
+}
+}{
+\newcommand{\makecoverpage}{\ClassError{chalmers-thesis}{Package 'tikz' necessary.}{Load the 'tikz' package or use the nocover option.}}
+}
+}
 
 \newcommand{\maketitlepage}{
  \newpage\thispagestyle{empty}
@@ -345,7 +346,7 @@
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
   \renewcommand{\and}{\\}\MakeUppercase{\@author}
-  \@ifundefined{@ISBN}{}{\\ISBN \@ISBN\\}
+  \@ifundefined{@ISBN}{}{\\ISBN \@ISBN}
   \par}
  \vskip 2em
  {\noindent \copyright\ {\renewcommand{\and}{, }\MakeUppercase{\@author}}, \@copyrightyear\par}
@@ -384,6 +385,15 @@
 }
 
 \renewcommand{\maketitle}{%
+ \@checkifdefined{thesisin}
+ \@checkifdefined{reportno}
+ \@checkifdefined{title}
+ \@checkifdefined{author}
+ \@checkifdefined{author}
+ \@checkifdefined{department}
+ \@checkifdefined{copyrightyear}
+ \@checkifdefined{ISSN}
+
  \if@cover
   \makecoverpage
  \fi
