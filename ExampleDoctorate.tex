@@ -1,8 +1,11 @@
 % This is an example on how to use the chalmers-thesis document class for a master's thesis.
 % Document should be compiled with pdflatex or lualatex
 
-% change doctorate to 
-\documentclass[doctorate,a4paper]{chalmers-thesis}
+%\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
+
+% change doctorate to
+\documentclass[doctorate,b5paper]{chalmers-thesis}
+% \documentclass{report}
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Convenient use of subfiles in documents.
@@ -21,7 +24,7 @@
 %\usepackage{siunitx} % For all your numerical values and units. 
 %\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-\usepackage{contmech}
+%\usepackage{contmech}
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -56,32 +59,32 @@ Nigeria
 \dedication{\textit{to my dear mother.}}
 \paperwork{\blindtext}
 
-\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
-\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
+%\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
+%\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
 
 \bibliography{ExampleBib}
 
 \begin{document}
 \maketitle
-%\makethesisdefence % Prints the thesis defence paper instead of the title pages.
 
-\part{Extended Summary}
+\part{Extended Summary} % Using the starred command avoids numbering.
 
 \subfile{ExampleIntroduction}
-
+\blindtext
+\chapter{Foobar}
+\blindtext
 \nocite{*} % Causes everything in bibliography to be printed
 \printbibliography
 
 \part{Appended Papers A--B}
 
 % You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically
-%\paper{\citetitle*{paper:A}}{\fullcite{paper:A}}
-\paper{\citefield{paper:A}[]{title}}{\fullcite{paper:A}}
+\paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 %\paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 %\includepdf[pages=-]{papera.pdf}
 
 %\paper{Assessment of acceleration modeling for fluid-filled porous media subjected to dynamic loading}{\blindtext} %{\fullcite{paper:A}}
-\paper{\citetitle*{paper:B}}{\fullcite{paper:B}}
+\paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
 %\includepdf[pages=-]{paperb.pdf}
 
 \end{document}

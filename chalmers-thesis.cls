@@ -29,7 +29,7 @@
 \DeclareOption{licentiate}{\global\@licentiatetrue
   \global\@bachelorfalse\global\@mastersfalse\global\@doctoratefalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
-  \global\@bachelorfalse\global\@masterstrue\global\@licentiatefalse}
+  \global\@bachelorfalse\global\@mastersfalse\global\@licentiatefalse}
 \DeclareOption{nocover}{\global\@coverfalse}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
@@ -39,25 +39,21 @@
 \LoadClass[twoside]{report}
 
 % Set up with the required packages
-\RequirePackage{graphicx}
 \RequirePackage{etoolbox}
-\RequirePackage{fancyhdr}
 \RequirePackage[top=0.1\paperheight, bottom=0.1\paperheight, left=0.1\paperwidth, right=0.1\paperwidth]{geometry}
 
 %\RequirePackage[font=small,format=plain,textfont=it,up]{caption}
 
+% Makes the chapters act like a big section
 \RequirePackage{titlesec}
-% \renewcommand{\thechapter}{\Roman{chapter}}
-% \titleformat{\chapter}[display]
-% {\bfseries\Large}
-% {\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter}
-% {4ex}
-% {\titlerule
-% \vspace{2ex}%
-% \filright}
-% [\vspace{2ex}%
-% \titlerule]
+\usepackage{titlesec}
+\titleclass{\chapter}{straight}
+\newcommand{\chapterbreak}{}
+\titleformat{\chapter}[hang]{\bfseries\huge}{\thechapter\quad}{0em}{}
+\titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
+% Removes header
+\RequirePackage{fancyhdr}
 \fancyhead{}
 \renewcommand{\headrulewidth}{0pt}
 
@@ -336,7 +332,7 @@
   {\@department\par}
   \@ifundefined{@division}{}{{\textit{\@division}\par}}
   {\MakeUppercase{\universityname}\par}
-  \vskip 2mm
+  \vskip 0.5em
   {\cityname, \countryname\ \@copyrightyear\par}
  \end{center}
 }
@@ -393,6 +389,8 @@
  \@checkifdefined{department}
  \@checkifdefined{copyrightyear}
  \@checkifdefined{ISSN}
+ \@checkifdefined{firstabstract}
+ \@checkifdefined{keywords}
 
  \if@cover
   \makecoverpage
