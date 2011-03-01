@@ -57,11 +57,10 @@
 \DeclareMathOperator{\tr}{tr} % Trace
 
 % ordinary derivative - analogous to the partial derivative command
-\providecommand{\od}[3][]{\ensuremath{\frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}}} % Ordinary derivatives
+\providecommand{\od}[2]{\ensuremath{\frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}}} % Ordinary derivatives
+\providecommand{\pd}[2]{\ensuremath{\frac{\partial\: #1}{\partial #2}} % Total derivatives
+\providecommand{\md}[2]{\ensuremath{\frac{\partial^2\: #1}{\partial #1 \partial #2} % Mixed derivatives.
 
-\providecommand{\op}[2]{\frac{\partial\: #1}{\partial\: #2}} % Partial derivatives, \ts K = \pderiv{\to x}{\to y}
-\providecommand{\od}[2]{\frac{\mathrm{d}\: #1}{\mathrm{d} #2}} % Total derivatives
-
-%\providecommand{\abs}{\lvert}{\rvert} % Norm of a tensor or vector \norm A or \nornm* A
-%\providecommand{\norm}{\lVert}{\rVert} % Absolute value of a scalar \abs x
-%\providecommand{\mcc}{\langle}{\rangle} % McCauley bracket
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Norm of a tensor or vector \norm A or \nornm* A
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert} % Absolute value of a scalar \abs x
+\DeclarePairedDelimiter{\mcc}{\langle}{\rangle} % McCauley bracket
