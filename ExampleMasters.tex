@@ -1,22 +1,30 @@
-% This is an example on how to use the chalmers-thesis document class for a master's thesis.
+% This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 
-% For bachelor thesis, change "masters" to "bachelor".
-\documentclass[masters,a4paper]{chalmers-thesis}
-\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x
-\usepackage{microtype} % Magically improves typesetting for pdflatex
-\usepackage{subfiles} % Split up the contents, see Introduction.tex
+\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
-% Other optional packages. All are highly recommended.
-%\usepackage{mathtools} % All your math related needs
+% change doctorate to
+\documentclass[masters,a4paper]{chalmers-thesis}
+% \documentclass{report}
+\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
+\usepackage{microtype} % Magically improves typesetting for pdflatex
+\usepackage{subfiles} % Convenient use of subfiles in documents.
+\usepackage{hyperref} % Highly recommended for in document links and document metadata.
+\usepackage[english]{babel}
+
+\usepackage{csquotes} % Needed for biblatex
+\usepackage[backend=biber]{biblatex} % Modern bibliography facilities
+\usepackage{mathtools} % All your math related needs
+\usepackage{tikz} % Draw figures. Required for cover page
+
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
-%\usepackage{siunitx} % For all your numerical values and units. 
-%\usepackage{tikz} % Draw figures with tikz. 
+%\usepackage{siunitx} % For all your numerical values and units.
 %\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
+%\usepackage{contmech}
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -31,7 +39,7 @@
 \copyrightyear{2011}
 
 % You should scale the figure according to textwidth and or paperheight.
-\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cover.png}}
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover.png}}
 \covercaption{Some explanation}
 
 \firstabstract{\blindtext}
@@ -48,7 +56,7 @@
 \maketitle
 
 % Highly recommended to put contents into subfiles, or use \input.
-\subfile{Introduction}
+\subfile{ExampleIntroduction}
 %\subfile{Theory}
 %\subfile{Method}
 

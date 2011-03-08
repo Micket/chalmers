@@ -217,7 +217,7 @@
 \newcounter{paper}
 \setcounter{paper}{0}
 \newcommand{\papernumber}{\Alph} % Determines the numbering of papers.
-\newcommand{\toppapercolumn}[1]{ \begin{minipage}[t]{0.2\textwidth} \large \textbf{Paper #1}\par\end{minipage} }
+\newcommand{\toppapercolumn}[1]{ \begin{minipage}[t]{0.2\textwidth} \large \hyperlink{paper:#1}{\textbf{Paper #1}}\par\end{minipage} }
 \newcommand{\topreferencecolumn}[1]{ \begin{minipage}[c]{0.7\textwidth} #1\end{minipage} }
 
 % Main command, works similarly as \section.
@@ -231,9 +231,10 @@
 
  }
  \thispagestyle{empty}
+ \hypertarget{paper:\papernumber{paper}}{\mbox{}}
  \vspace*{0em}
  \begin{flushright}
-  {\huge\textbf{Paper \Alph{paper}}}
+  {\huge\textbf{Paper \papernumber{paper}}}
  \end{flushright}
  \vspace*{5em}
  {\noindent\Large\textbf{#1}\par}
@@ -256,8 +257,6 @@
 \vskip 1em
 \@starttoc{top}
 \vskip 1em
-
-\noindent \@paperwork
 }
 
 % Macro for checking all required commands are set.
@@ -429,6 +428,7 @@
  \if@bachelorormasters\else
   \cleardoublepage
   \tableofpapers
+  \noindent \@paperwork
  \fi
 
  \cleardoublepage

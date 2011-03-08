@@ -1,7 +1,7 @@
-% This is an example on how to use the chalmers-thesis document class for a master's thesis.
+% This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 
-%\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
+\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
 % change doctorate to
 \documentclass[doctorate,b5paper]{chalmers-thesis}
@@ -13,7 +13,7 @@
 \usepackage[english]{babel}
 
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[]{biblatex} % Modern bibliography facilities
+\usepackage{biblatex} % Modern bibliography facilities
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures. Required for cover page
 
@@ -28,6 +28,7 @@
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
+% User commands
 \title{The Title of Your Thesis which might be very long}
 \subtitle{And Perhaps a Subtitle}
 \author{Some Author\and Other Author}
@@ -77,7 +78,6 @@ Nigeria
 \printbibliography
 
 \part{Appended Papers A--B}
-
 % You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically
 %\paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
