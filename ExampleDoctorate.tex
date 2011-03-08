@@ -12,6 +12,7 @@
 \usepackage{hyperref} % Highly recommended for in document links and document metadata.
 \usepackage[english]{babel}
 
+% More or less required packages
 \usepackage{csquotes} % Needed for biblatex
 \usepackage{biblatex} % Modern bibliography facilities
 \usepackage{mathtools} % All your math related needs
@@ -22,9 +23,9 @@
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
 %\usepackage{siunitx} % For all your numerical values and units. 
-%\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
+%\usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
+%\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-%\usepackage{contmech}
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -67,23 +68,32 @@ Nigeria
 
 \begin{document}
 \maketitle
+% If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
+%\makecoverpage
+%\maketitlepage
+%\makeprintinfopage
+%\makeabstractpage\pagestyle{plain}
+% \hrule
+% \noindent\parbox[c]{0.2\textwidth}{Paper A\hfil}\hspace{1em}\parbox{0.8\textwidth-1em}{ \blindtext}
+% \hrule
+%\noindent\begin{tabular}{m{.3\textwidth}m{0.7\textwidth-24pt}} short text here that makes no sense & \blindtext\end{tabular}
 
+
+%\bTABLE \bTR \bTD[align=lohi,width=0.3\textwidth,background=color,backgroundcolor=darkgray] Paper I \eTD \bTD[width=0.7\textwidth] \blindtext \eTD \eTR \eTABLE \startframedtext[width=\textwidth,background=color,backgroundcolor=gray] \blindtext \stopframedtext
 \part{Extended Summary} % Using the starred command avoids numbering.
 
 \subfile{ExampleIntroduction}
-\blindtext
-\chapter{Foobar}
 \blindtext
 \nocite{*} % Causes everything in bibliography to be printed
 \printbibliography
 
 \part{Appended Papers A--B}
 % You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically
-%\paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
+% \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 %\includepdf[pages=-]{papera.pdf}
 
 \paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
-%\includepdf[pages=-]{paperb.pdf}
+% \includepdf[pages=-]{paperb.pdf}
 
 \end{document}

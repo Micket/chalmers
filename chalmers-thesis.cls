@@ -120,21 +120,25 @@
  
  % Document metadata setup
  \@ifpackageloaded{hyperref}{
- \renewcommand{\and}{, }
+  \@checkifdefined{author}
+  \@checkifdefined{title}
+  \@checkifdefined{keywords}
+  \def\thesisname{Hejsan}
+  \renewcommand{\and}{, }
   \hypersetup{%
-   breaklinks,%
-   pdfcreator    = \LaTeX{},%
-   pdfproducer   = \LaTeX{},%
-   bookmarksopen = true,%
-   pdfauthor     = \@author,%
-   pdftitle      = \@title,%
-   %pdfsubject    = \thesisname,%
-   pdfkeywords   = \@keywords,%
-   colorlinks = true,
-   urlcolor   = black,%
-   citecolor  = black,%
-   linkcolor  = black,%
-   filecolor  = black,%
+    breaklinks,%
+    pdfcreator    = \LaTeX{},%
+    pdfproducer   = \LaTeX{},%
+    bookmarksopen = true,%
+    pdfauthor     = \@author,%
+    pdftitle      = \@title,%
+    pdfsubject    = \thesisname,%
+    pdfkeywords   = \@keywords,%
+    colorlinks = true,
+    urlcolor   = black,%
+    citecolor  = black,%
+    linkcolor  = black,%
+    filecolor  = black,%
   }
  }{\ClassWarning{chalmers-thesis}{Package 'hyperref' strongly recommended}{}}
 }
@@ -217,21 +221,31 @@
 \newcounter{paper}
 \setcounter{paper}{0}
 \newcommand{\papernumber}{\Alph} % Determines the numbering of papers.
-\newcommand{\toppapercolumn}[1]{ \begin{minipage}[t]{0.2\textwidth} \large \hyperlink{paper:#1}{\textbf{Paper #1}}\par\end{minipage} }
-\newcommand{\topreferencecolumn}[1]{ \begin{minipage}[c]{0.7\textwidth} #1\end{minipage} }
+
+% Customizeable lengths
+\newlength{\papercolumn}
+\newlength{\paperpadding}
+\setlength{\papercolumn}{0.15\textwidth}
+\setlength{\paperpadding}{1em}
+
+% Customizeable command for how the entry is rendered.
+\newcommand{\topentry}[2]{%
+  \noindent\parbox[c]{\papercolumn}{\large \hyperlink{paper:#1}{\textbf{Paper #1}}\hfil}%
+  \hspace{\paperpadding}%
+  \parbox{\textwidth-\papercolumn-\paperpadding}{#2}\par\vskip 1em%
+}
 
 % Main command, works similarly as \section.
 \newcommand{\paper}[2]{
  \stepcounter{paper}
  \addtocontents{top}{%
-  \protect\noindent
-  \protect\toppapercolumn{\papernumber{paper}}
-  \protect\topreferencecolumn{#2}
-  \protect\\[1em]
-
+  \protect\topentry{\papernumber{paper}}{#2}
  }
- \thispagestyle{empty}
+ \newpage
+ % Links and bookmarks are always nice;
+ \belowpdfbookmark{Paper \papernumber{paper}}{paper:\papernumber{paper}}
  \hypertarget{paper:\papernumber{paper}}{\mbox{}}
+ \thispagestyle{empty}
  \vspace*{0em}
  \begin{flushright}
   {\huge\textbf{Paper \papernumber{paper}}}
@@ -317,6 +331,13 @@
 }
 
 \newcommand{\maketitlepage}{
+ \@checkifdefined{thesisin}
+ \@checkifdefined{reportno}
+ \@checkifdefined{title}
+ \@checkifdefined{author}
+ \@checkifdefined{department}
+ \@checkifdefined{copyrightyear}
+
  \newpage\thispagestyle{empty}
  \begin{center}
   {\MakeUppercase{\thesisname\ \inname\ \@thesisin}\ \@reportno\par}
@@ -337,6 +358,14 @@
 }
 
 \newcommand{\makeprintinfopage}{
+ \@checkifdefined{thesisin}
+ \@checkifdefined{reportno}
+ \@checkifdefined{title}
+ \@checkifdefined{author}
+ \@checkifdefined{department}
+ \@checkifdefined{copyrightyear}
+ \@checkifdefined{ISSN}
+
  \newpage
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
@@ -358,11 +387,17 @@
  \@ifundefined{@covercaption}{}{{\noindent \covername:\\ \@covercaption\par}}
  \vskip 1em
  {\noindent \@printers
-  \@department
   \\ \cityname, \countryname\ \@copyrightyear\par}
 }
 
 \newcommand{\makeabstractpage}{
+ \@checkifdefined{thesisin}
+ \@checkifdefined{title}
+ \@checkifdefined{author}
+ \@checkifdefined{department}
+ \@checkifdefined{firstabstract}
+ \@checkifdefined{keywords}
+
  \newpage
  \setcounter{page}{1}
  \pagenumbering{roman}
@@ -379,11 +414,43 @@
  \noindent \keywordsname: \@keywords
 }
 
+\newcommand{\makesecondabstractpage}{%
+  \newpage
+  \begin{otherlanguage}{\@secondarylanguage}
+    \begin{center}\Large\textsc{\abstractname}\end{center}
+    \@secondabstract
+  \end{otherlanguage}
+}
+
+\newcommand{\makededicationpage}{%
+  \cleardoublepage
+  \vspace*{0.2\textheight}
+  \begin{center}\@dedication\end{center}
+}
+
+\newcommand{\makeprefacepage}{%
+  \cleardoublepage
+  \phantomsection\addcontentsline{toc}{chapter}{\prefacename}
+  \begin{center}\Large\textsc{\prefacename}\end{center} \@preface
+}
+
+\newcommand{\makeacknowledgementspage}{% Note: Doesn't need a new page.
+  \phantomsection\addcontentsline{toc}{chapter}{\acknowledgementsname}
+  \begin{center}\Large\textsc{\acknowledgementsname}\end{center} \@acknowledgements
+}
+
+\newcommand{\maketableofpaperspage}{
+  \cleardoublepage
+  \tableofpapers
+  \@ifundefined{@paperwork}{
+    \noindent \@paperwork
+  }
+}
+
 \renewcommand{\maketitle}{%
  \@checkifdefined{thesisin}
  \@checkifdefined{reportno}
  \@checkifdefined{title}
- \@checkifdefined{author}
  \@checkifdefined{author}
  \@checkifdefined{department}
  \@checkifdefined{copyrightyear}
@@ -402,33 +469,27 @@
  \makeabstractpage\pagestyle{plain}
 
  % Empty or second abstract
- \@ifundefined{@secondabstract}{
-  \newpage\mbox{}}{
-  \newpage\begin{otherlanguage}{\@secondarylanguage}
-    \begin{center}\Large\textsc{\abstractname}\end{center} \@secondabstract \end{otherlanguage}}
+ \@ifundefined{@secondabstract}{}{
+  \makesecondabstractpage
+}
 
  \@ifundefined{@dedication}{}{
-  \cleardoublepage
-  \vspace*{0.2\textheight}
-  \begin{center}\@dedication\end{center}
+  \makededicationpage
  }
 
  % Preface and acknowledgements
- \cleardoublepage
  \@ifundefined{@preface}{}{
-  \phantomsection\addcontentsline{toc}{chapter}{\prefacename}
-  \begin{center}\Large\textsc{\prefacename}\end{center} \@preface
+  \makeprefacepage
  }
  \@ifundefined{@acknowledgements}{}{
-  \phantomsection\addcontentsline{toc}{chapter}{\acknowledgementsname}
-  \begin{center}\Large\textsc{\acknowledgementsname}\end{center} \@acknowledgements
+  \makeacknowledgementspage
  }
 
  % If its a doctorate or licentiate thesis, include the table of papers.
  \if@bachelorormasters\else
-  \cleardoublepage
-  \tableofpapers
-  \noindent \@paperwork
+  \maketableofpaperspage
+  %\newpage
+  %\tableofwork % TODO
  \fi
 
  \cleardoublepage
@@ -436,8 +497,8 @@
 
  % Sets up page numbering for the rest of the document.
  \newpage
- \pagenumbering{arabic}
  \pagestyle{fancy}
+%  \pagenumbering{arabic}
 }
 
 % Page + abstract for defence of thesis.
