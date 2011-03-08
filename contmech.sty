@@ -1,6 +1,6 @@
 \RequirePackage{mathtools}
 
-% The common binary operators 
+% The common binary operators
 \newcommand{\dprodt}{\mathbin{\cdot\cdot}}
 \newcommand{\dprod}{\mathbin{\vcentcolon}}
 \newcommand{\cross}{\mathbin{\times}}
@@ -9,14 +9,16 @@
 \newcommand{\louter}{\mathbin{\underline{\otimes}}} % Lower outer product
 
 % Tensors
-\renewcommand{\to}[1]{\boldsymbol #1} % First order tensor. Bold, cursive
-\newcommand{\ts}[1]{\boldsymbol \mathrm{#1}} % Second order tensor. Bold, straigt
-%\newcommand{\ts}[1]{\boldsymbol #1} % Second order tensor. Bold, cursive
-\newcommand{\td}[1]{\boldsymbol \mathcal{#1}} % Third order tensor. Bold, caligraphy
-\newcommand{\tf}[1]{\boldsymbol \mathsf{#1}} % Fourth order tensor. Bold, sans-serif
+\renewcommand{\to}[1]{\boldsymbol{#1}} % First order tensor. Bold, cursive
+%\newcommand{\ts}[1]{\boldsymbol{\mathrm{#1}}} % Second order tensor. Bold, straigt
+\newcommand{\ts}[1]{\boldsymbol{#1}} % Second order tensor. Bold, cursive
+\newcommand{\td}[1]{\boldsymbol{\mathcal{#1}}} % Third order tensor. Bold, caligraphy
+\newcommand{\tf}[1]{\boldsymbol{\mathsf{#1}}} % Fourth order tensor. Bold, sans-serif
 
 \renewcommand{\vec}[1]{\underline{#1}} % Vectors
 \newcommand{\mat}[1]{\underline{#1}} % Matrices (even if they are the same, keep them seperate if you ever wish to change it.
+
+\newcommand{\set}[1]{\mathbb{#1}} % For defining sets
 
 \newcommand{\majorT}{\mathrm{T}} % For major transpose, \ts A^\Tran
 \newcommand{\minorT}{\mathrm{t}} % For minor transpose, \tf A^\tran
@@ -35,6 +37,11 @@
 \newcommand{\mean}{\mathrm{m}} % Mean value
 \newcommand{\red}{\mathrm{red}} % Reduced value
 \newcommand{\thres}{\mathrm{th}} % Threshold value
+\newcommand{\macro}{\mathrm{M}} % Macroscopic value
+\newcommand{\fluct}{\mathrm{s}} % Fluctuation
+
+\newcommand{\Dirichlet}{\mathrm{D}}
+\newcommand{\Neumann}{\mathrm{N}}
 
 % For typing out second order base indicies conveniently
 \newcommand{\be}[1]{\to{e}_{#1}}
@@ -57,9 +64,9 @@
 \DeclareMathOperator{\tr}{tr} % Trace
 
 % ordinary derivative - analogous to the partial derivative command
-\providecommand{\od}[2]{\ensuremath{\frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}}} % Ordinary derivatives
-\providecommand{\pd}[2]{\ensuremath{\frac{\partial\: #1}{\partial #2}} % Total derivatives
-\providecommand{\md}[2]{\ensuremath{\frac{\partial^2\: #1}{\partial #1 \partial #2} % Mixed derivatives.
+\providecommand{\od}[2]{\ensuremath{\frac{\dif\:#1}{\dif #1}}} % Ordinary derivatives
+\providecommand{\pd}[2]{\ensuremath{\frac{\partial\: #1}{\partial #2}}} % Total derivatives
+\providecommand{\md}[2]{\ensuremath{\frac{\partial^2\: #1}{\partial #1 \partial #2}}} % Mixed derivatives.
 
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % Norm of a tensor or vector \norm A or \nornm* A
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert} % Absolute value of a scalar \abs x
