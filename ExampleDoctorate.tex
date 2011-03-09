@@ -16,7 +16,8 @@
 \usepackage{csquotes} % Needed for biblatex
 \usepackage{biblatex} % Modern bibliography facilities
 \usepackage{mathtools} % All your math related needs
-\usepackage{tikz} % Draw figures. Required for cover page
+\usepackage{tikz} % Draw figures, required for cover page
+\usepackage{subfig} % Subfloats
 
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
@@ -69,17 +70,9 @@ Nigeria
 \begin{document}
 \maketitle
 % If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
-%\makecoverpage
-%\maketitlepage
-%\makeprintinfopage
-%\makeabstractpage\pagestyle{plain}
-% \hrule
-% \noindent\parbox[c]{0.2\textwidth}{Paper A\hfil}\hspace{1em}\parbox{0.8\textwidth-1em}{ \blindtext}
-% \hrule
-%\noindent\begin{tabular}{m{.3\textwidth}m{0.7\textwidth-24pt}} short text here that makes no sense & \blindtext\end{tabular}
+%\make****page
+% See chalmers-thesis.cls - \maketitle command for more details.
 
-
-%\bTABLE \bTR \bTD[align=lohi,width=0.3\textwidth,background=color,backgroundcolor=darkgray] Paper I \eTD \bTD[width=0.7\textwidth] \blindtext \eTD \eTR \eTABLE \startframedtext[width=\textwidth,background=color,backgroundcolor=gray] \blindtext \stopframedtext
 \part{Extended Summary} % Using the starred command avoids numbering.
 
 \subfile{ExampleIntroduction}
