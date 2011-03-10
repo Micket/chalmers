@@ -1,24 +1,33 @@
 % This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 
+% These manuals are a *must* read. They are all full of good examples;
+% amsldoc   - http://mirror.ctan.org/macros/latex/required/amslatex/math/amsldoc.pdf
+% mathtools - http://mirror.ctan.org/macros/latex/contrib/mh/mathtools.pdf
+% biblatex  - http://mirror.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf
+% booktabs  - http://mirror.ctan.org/macros/latex/contrib/booktabs/booktabs.pdf
+% http://www.ctan.org/tex-archive/help/Catalogue/bytopic.html
+% http://en.wikibooks.org/wiki/LaTeX/
+
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
-% change doctorate to
+% change doctorate to licentiate if necessary
 \documentclass[doctorate,b5paper]{chalmers-thesis}
-% \documentclass{report}
+
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Convenient use of subfiles in documents.
 \usepackage{hyperref} % Highly recommended for in document links and document metadata.
-\usepackage[english]{babel}
+\usepackage[swedish, english]{babel}
 
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage{biblatex} % Modern bibliography facilities
+\usepackage[firstinits=true, style=alphabetic]{biblatex} % Modern bibliography facilities
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures, required for cover page
 \usepackage{subfig} % Subfloats
 
+% Read the manuals for the respective package to see the usage;
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
@@ -50,7 +59,7 @@ Nigeria
 \oppositiondate{10.00 am, 30\textsuperscript{th} May, 2011 in HA2 Hörsalsvägen 4, Göteborg}
 
 % You should scale the figure according to textwidth and or paperheight.
-\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover.png}}
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
 \covercaption{Some explanation}
 
 \firstabstract{\blindtext}
@@ -65,7 +74,8 @@ Nigeria
 %\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
 %\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
 
-\bibliography{ExampleBib}
+\bibliography{ExampleBib} % Old command 
+%\addbibresource{ExampleBib} % New comnand, use if possible
 
 \begin{document}
 \maketitle
@@ -74,11 +84,9 @@ Nigeria
 % See chalmers-thesis.cls - \maketitle command for more details.
 
 \part{Extended Summary} % Using the starred command avoids numbering.
-
 \subfile{ExampleIntroduction}
-\blindtext
-\nocite{*} % Causes everything in bibliography to be printed
-\printbibliography
+\nocite{*} % Cites everything from the bibliography
+\printbibliography % This command is new in biblatex. Do not attempt to use style files as with old latex.
 
 \part{Appended Papers A--B}
 % You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically

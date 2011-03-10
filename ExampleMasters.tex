@@ -1,30 +1,41 @@
 % This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 
+% These manuals are a *must* read. They are all full of good examples;
+% amsldoc   - http://mirror.ctan.org/macros/latex/required/amslatex/math/amsldoc.pdf
+% mathtools - http://mirror.ctan.org/macros/latex/contrib/mh/mathtools.pdf
+% biblatex  - http://mirror.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf
+% booktabs  - http://mirror.ctan.org/macros/latex/contrib/booktabs/booktabs.pdf
+% http://www.ctan.org/tex-archive/help/Catalogue/bytopic.html
+% http://en.wikibooks.org/wiki/LaTeX/
+
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
-% change doctorate to
+% change masters to bachelor if necessary
 \documentclass[masters,a4paper]{chalmers-thesis}
-% \documentclass{report}
+
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Convenient use of subfiles in documents.
 \usepackage{hyperref} % Highly recommended for in document links and document metadata.
-\usepackage[english]{babel}
+\usepackage[swedish, english]{babel}
 
+% More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[backend=biber]{biblatex} % Modern bibliography facilities
+\usepackage[firstinits=true, style=alphabetic]{biblatex} % Modern bibliography facilities
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures. Required for cover page
+\usepackage{subfig} % Subfloats
 
+% Read the manuals for the respective package to see the usage;
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
 %\usepackage{siunitx} % For all your numerical values and units.
 %\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
+%\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-%\usepackage{contmech}
 
 \usepackage{blindtext} % Package used to put in placeholder text. Remove it.
 
@@ -39,7 +50,7 @@
 \copyrightyear{2011}
 
 % You should scale the figure according to textwidth and or paperheight.
-\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover.png}}
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
 \covercaption{Some explanation}
 
 \firstabstract{\blindtext}
@@ -54,14 +65,17 @@
 \begin{document}
 %\selectlanguage{swedish} % Use this if you are writing your thesis in swedish.
 \maketitle
+% If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
+%\make****page
+% See chalmers-thesis.cls - \maketitle command for more details.
 
 % Highly recommended to put contents into subfiles, or use \input.
 \subfile{ExampleIntroduction}
 %\subfile{Theory}
 %\subfile{Method}
 
-\nocite{*} % Causes everything in bibliography to be printed (should not be used in final paper)
-\printbibliography
+\nocite{*} % Cites everything from the bibliography
+\printbibliography % This command is new in biblatex. Do not attempt to use style files as with old latex.
 
 \end{document}
 
