@@ -5,7 +5,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/03/08 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/03/15 CHALMERS Thesis class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macro for checking all required commands are set.
@@ -21,6 +21,8 @@
 \newif\if@doctorate
 \newif\if@bachelorormasters
 \newif\if@cover
+\newif\if@draft
+\newif\if@gfivepaper
 
 \@bachelorfalse
 \@mastersfalse
@@ -28,9 +30,12 @@
 \@doctoratefalse
 \@bachelorormastersfalse
 \@covertrue
+\@draftfalse
+\@gfivepaperfalse
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Options of class
+% bachelor, masters, licentiate, doctorate, nocover, g5paper
 \DeclareOption{bachelor}{\global\@bachelortrue
   \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse}
 \DeclareOption{masters}{\global\@masterstrue
@@ -40,15 +45,18 @@
 \DeclareOption{doctorate}{\global\@doctoratetrue
   \global\@bachelorfalse\global\@mastersfalse\global\@licentiatefalse}
 \DeclareOption{nocover}{\global\@coverfalse}
-
+\DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
+\DeclareOption{g5paper}{\global\@gfivepapertrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-
 \ProcessOptions
-
 \LoadClass[twoside]{report}
 
 % Set up with the required packages
 \RequirePackage{etoolbox}
+\if@gfivepaper
+  \setlength{\paperwidth}{169mm}
+  \setlength{\paperheight}{239mm}
+\fi
 \RequirePackage[top=0.1\paperheight, bottom=0.1\paperheight, left=0.1\paperwidth, right=0.1\paperwidth]{geometry}
 
 % Makes the chapters act like a big section
@@ -58,16 +66,15 @@
 \titleformat{\chapter}[hang]{\bfseries\huge}{\thechapter\quad}{0em}{}
 \titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
+\RequirePackage{titletoc}
+%\titlecontents{section}[1.5em]{}{\contentslabel{2.3em}}{\hspace*{-2.3em}}{\titlerule*[1pc]{.}\contentspage}
+
+
 % Parts should start a new right side page;
 \titleclass{\part}{straight}
 \newcommand{\partbreak}{\cleardoublepage}
-\titleformat{\part}[display]{\bfseries\huge\centering}{\LARGE\partname\xspace\thepart}{0em}{}
+\titleformat{\part}[display]{\bfseries\huge\centering}{\LARGE\partname\ \thepart}{0em}{}
 \titlespacing*{\part}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-% Removes header
-\RequirePackage{fancyhdr}
-\fancyhead{}
-\renewcommand{\headrulewidth}{0pt}
 
 % Adjustments of floats and equations.
 \setlength{\intextsep}{12pt}
@@ -81,8 +88,11 @@
 % Dynamic setup for user loaded packages.
 \AtEndPreamble{
  \@ifpackageloaded{color}{
-  \definecolor{chalmers_blue}{rgb}{0, 0, 0.4}
-  \definecolor{chalmers_grey}{rgb}{0.8, 0.8, 0.8}
+  \definecolor{chalmers_blue}     {RGB}{  0,  0,102}
+  \definecolor{chalmers_grey}     {RGB}{204,204,204}
+  \definecolor{chalmers_lightblue}{RGB}{ 28, 78,157}%{1c4e9d}
+  \definecolor{chalmers_lightgold}{RGB}{239,197, 22}%{efc516}
+  \definecolor{chalmers_purple}   {RGB}{ 51, 51,102}%{333366}
  }{}
 
  % Check for amsmath
@@ -122,6 +132,8 @@
    \def\licentiatethesisname{Licentiatavhandling}%
    \def\licentiatethesisname{Doktorsavhandling}%
    \def\inname{i}%
+   \def\listofpublicationsname{Avhandling}%
+   \def\papername{Artikel}%
   }
  
   \addto\captionsenglish{%
@@ -137,6 +149,8 @@
    \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
    \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
    \def\inname{in}%
+   \def\listofpublicationsname{Thesis}%
+   \def\papername{Paper}%
   }
  }{\ClassError{chalmers-thesis}{Package 'babel' required}{}}
  
@@ -217,6 +231,7 @@
   \def\titlepage@bg{}
   \def\titlepage@logotype{Avancez_invert}
   \def\thesisname{\bachelorthesisname}
+  \def\@reportseries{\thesisname\ \inname\ \@thesisin}
 \fi
 \if@masters
   \global\@bachelorormasterstrue
@@ -226,6 +241,7 @@
   \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_white}
   \def\thesisname{\masterthesisname}
+  \def\@reportseries{\thesisname\ \inname\ \@thesisin}
 \fi
 \if@licentiate
   \ISSN{1652-8565}
@@ -234,14 +250,18 @@
   \def\titlepage@bg{\fill[chalmers_grey] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_black}
   \def\thesisname{\licentiatethesisname}
+  \def\@reportseries{\thesisname\ \inname\ \@thesisin}
 \fi
 \if@doctorate
   \ISSN{0346-718X}
   \def\titlepage@edge{}
   \def\titlepage@chalmerscolor{white}
-  \def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
-  \def\titlepage@logotype{Avancez_gold}
+  %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  %\def\titlepage@logotype{Avancez_gold}
+  \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  \def\titlepage@logotype{Avancez_lightgold}
   \def\thesisname{\doctoratethesisname}
+  \def\@reportseries{Doktorsavhandlingar vid Chalmers Tekniska H\"ogskola\\Ny serie nr.\ }
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,7 +278,7 @@
 
 % Customizeable command for how the entry is rendered.
 \newcommand{\topentry}[2]{%
-  \noindent\parbox[c]{\papercolumn}{\large \hyperlink{paper:#1}{\textbf{Paper #1}}\hfil}%
+  \noindent\parbox[c]{\papercolumn}{\large \hyperlink{paper:#1}{\textbf{\papername\ #1}}\hfil}%
   \hspace{\paperpadding}%
   \parbox{\textwidth-\papercolumn-\paperpadding}{#2}\par\vskip 1em%
 }
@@ -295,11 +315,16 @@
 % Reads the *.top file which is automatically generated by \paper
 % Works similarly as \tableofcontents
 \newcommand{\tableofpapers}{
-\begin{center}\Large \textsc{Thesis}\end{center}
-\noindent This thesis consists of an extended summary and the following appended papers:
 \vskip 1em
 \@starttoc{top}
 \vskip 1em
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Command for the title.
+\newcommand{\presectiontitle}[1]{
+  \phantomsection\addcontentsline{toc}{chapter}{#1}
+  \begin{center}\Large\textsc{#1}\end{center}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -364,15 +389,14 @@
 
  \newpage\thispagestyle{empty}
  \begin{center}
-  {\MakeUppercase{\thesisname\ \inname\ \@thesisin}\ \@reportno\par}
+  {\MakeUppercase{\thesisname\ \inname\ \@thesisin}\par}
   \vspace*{\stretch{1}}
   {\Large \@title\par}
   \vskip 1em
   \@ifundefined{@subtitle}{}{{\@subtitle\par}}
   \vskip 1em
-  {\thesisname\par}
   {\renewcommand{\and}{, }\MakeUppercase{\@author}\par}
-  \vspace*{\stretch{3}}%\vfill
+  \vspace*{\stretch{3}}
   {\@department\par}
   \@ifundefined{@division}{}{{\textit{\@division}\par}}
   {\MakeUppercase{\universityname}\par}
@@ -392,6 +416,7 @@
  \@checkifdefined{ISSN}
 
  \newpage
+ \vspace*{\stretch{1}}
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
   \renewcommand{\and}{\\}\MakeUppercase{\@author}
@@ -399,8 +424,8 @@
   \par}
  \vskip 2em
  {\noindent \copyright\ {\renewcommand{\and}{, }\MakeUppercase{\@author}}, \@copyrightyear\par}
- \vspace*{\stretch{1}}
- {\noindent \thesisname\ \inname \@thesisin\ \@reportno\\ % TODO: This is inconsistent!
+ \vskip 2em
+ {\noindent \@reportseries\ \@reportno\\
   ISSN \@ISSN\\
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
@@ -408,7 +433,7 @@
   \@postcode\ \cityname\\
   \countryname\\
   \telephonename: \@telephone\par}
- \vspace*{\stretch{3}}
+ \vspace*{\stretch{2}}
  \@ifundefined{@covercaption}{}{{\noindent \covername:\\ \@covercaption\par}}
  \vskip 1em
  {\noindent \@printers
@@ -434,8 +459,8 @@
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
   \universityname\par}
- \phantomsection\addcontentsline{toc}{chapter}{\abstractname}
- \begin{center}\Large\textsc{\abstractname}\end{center} \@firstabstract
+ \presectiontitle{\abstractname}
+ \@firstabstract
  \vskip 1em
  \noindent \keywordsname: \@keywords
 }
@@ -444,7 +469,7 @@
 \newcommand{\makesecondabstractpage}{%
   \newpage
   \begin{otherlanguage}{\@secondarylanguage}
-    \begin{center}\Large\textsc{\abstractname}\end{center}
+    \presectiontitle{\abstractname}
     \@secondabstract
   \end{otherlanguage}
 }
@@ -459,21 +484,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makeprefacepage}{%
   \cleardoublepage
-  \phantomsection\addcontentsline{toc}{chapter}{\prefacename}
-  \begin{center}\Large\textsc{\prefacename}\end{center} \@preface
+  \presectiontitle{\prefacename}
+  \@preface
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makeacknowledgementspage}{% Note: Doesn't need a new page.
-  \phantomsection\addcontentsline{toc}{chapter}{\acknowledgementsname}
-  \begin{center}\Large\textsc{\acknowledgementsname}\end{center} \@acknowledgements
+  \presectiontitle{\acknowledgementsname}
+  \@acknowledgements
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\maketableofpaperspage}{
   \cleardoublepage
   \phantomsection
-  \addcontentsline{toc}{chapter}{Thesis}
+  \presectiontitle{\listofpublicationsname}
+  \noindent This thesis consists of an extended summary and the following appended papers:
   \tableofpapers
   \@ifundefined{@paperwork}{}{
     \noindent \@paperwork
@@ -482,16 +508,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\maketitle}{%
- \@checkifdefined{thesisin}
- \@checkifdefined{reportno}
- \@checkifdefined{title}
- \@checkifdefined{author}
- \@checkifdefined{department}
- \@checkifdefined{copyrightyear}
- \@checkifdefined{ISSN}
- \@checkifdefined{firstabstract}
- \@checkifdefined{keywords}
-
  \if@cover
   \makecoverpage
  \fi
@@ -522,8 +538,6 @@
  % If its a doctorate or licentiate thesis, include the table of papers.
  \if@bachelorormasters\else
   \maketableofpaperspage
-  %\newpage
-  %\tableofwork % TODO
  \fi
 
  \cleardoublepage

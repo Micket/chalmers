@@ -12,7 +12,7 @@
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
 % change doctorate to licentiate if necessary
-\documentclass[doctorate,b5paper]{chalmers-thesis}
+\documentclass[doctorate,g5paper]{chalmers-thesis}
 
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
@@ -37,7 +37,7 @@
 %\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
 
-\usepackage{blindtext} % Package used to put in placeholder text. Remove it.
+\usepackage{lipsum}\setlipsumdefault{131-133} % Package used to put in placeholder text. Remove it.
 
 % User commands
 \title{The Title of Your Thesis which might be very long}
@@ -62,14 +62,14 @@ Nigeria
 \coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
 \covercaption{Some explanation}
 
-\firstabstract{\blindtext}
-%\secondabstract{swedish}{\blindtext}
+\firstabstract{\lipsum}
+%\secondabstract{swedish}{\lipsum}
 \keywords{Some stuff, More stuff, Stuff}
 
-\preface{\blindtext}
-\acknowledgements{\blindtext}
+\preface{\lipsum}
+\acknowledgements{\lipsum}
 \dedication{\textit{to my dear mother.}}
-\paperwork{\blindtext}
+\paperwork{\lipsum}
 
 %\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
 %\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
@@ -78,10 +78,19 @@ Nigeria
 %\addbibresource{ExampleBib} % New comnand, use if possible
 
 \begin{document}
+\selectlanguage{swedish}
 \maketitle
 % If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
-%\make****page
-% See chalmers-thesis.cls - \maketitle command for more details.
+%\makecoverpage
+%\maketitlepage
+%\makeprintinfopage
+%\makesecondabstractpage
+%\makededicationpage
+%\makeprefacepage
+%\makeacknowledgementspage
+%\maketableofpaperspage
+%\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\tableofcontents
+%\cleardoublepage\pagenumbering{arabic}
 
 \part{Extended Summary} % Using the starred command avoids numbering.
 \subfile{ExampleIntroduction}
