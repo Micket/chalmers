@@ -13,6 +13,8 @@
 
 % change doctorate to licentiate if necessary
 \documentclass[doctorate,g5paper]{chalmers-thesis}
+% All options are; doctorate, licentiate, masters, bachelor, nocover, draft, g5paper,
+% and everything the standard report class support.
 
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
@@ -75,10 +77,10 @@ Nigeria
 %\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
 
 \bibliography{ExampleBib} % Old command 
-%\addbibresource{ExampleBib} % New comnand, use if possible
+%\addbibresource{ExampleBib} % New comnand, use if available
 
 \begin{document}
-\selectlanguage{swedish}
+%\selectlanguage{swedish}
 \maketitle
 % If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
 %\makecoverpage

@@ -1,7 +1,60 @@
-% Thesis class template for Chalmers University of Technology.
-% Written by Mikael Öhman <mikael.ohman@chalmers.se>
-% This document is released under public domain, but the chalmers logo is trademarked.
-% Some words are translated to swedish if babel langauge is set, otherwise default to English
+%% Thesis class template for Chalmers University of Technology.
+%% Written by Mikael Öhman <mikael.ohman@chalmers.se>
+%% This document is released under public domain, but the chalmers logo is trademarked.
+%% Some words are translated to swedish if babel langauge is set, otherwise default to English
+
+%% Class options;
+% doctorate, licentiate, masters, bachelor - Sets the type of thesis accordingly
+% nocover - Do not print the cover in \maketitle.
+% draft - Makes \maketitle more compact, skipping unecessary blanks
+% g5paper - Sets the paper dimensions to 239mm * 169mm
+% All options are also passed the standard report class.
+
+%% Input commands (self-explanatory).
+% \author{Authors separated with \and}
+% \title{text}
+% \subtitle{text}
+% \firstabstract{text}
+% \secondabstract{language}{text}     - Optional
+% \keywords{comma separated keywords}
+% \preface{text}                      - Optional
+% \acknowledgements{text}             - Optional
+% \dedication{text}                   - Optional
+% \coverfigure{text}                  - Optional
+% \covercaption{text}                 - Optional
+% \copyrightyear{text}
+% \reportno{text}
+% \ISBN{text}
+% \department{text}
+% \division{text}                     - Optional
+% \thesisin{text}
+% \paperwork{text}
+
+%% User commands for the defence invitation
+% \opponent{text}
+% \oppositiondate{text}
+
+%% Predefined commands (do not need to be set)
+% \ISSN{text}
+% \printers{text}
+% \telephone{text}
+% \postcode{text}
+% \thesiscontents{text} - Text before the table of papers
+
+%% The predefined babel translations;
+% \countryname (Swedish, Sverige)
+% \telephonename (Telephone, Telefon)
+% \universityname (Chalmers University of Technology, Chalmers Tekniska H\"ogskola)
+% \covername (Cover, Omslag)
+% \acknowledgementsname (Acknowledgements, Tacks\"agelse)
+% \keywordsname (Keywords, Nyckelord)
+% \masterthesisname (Master's Thesis, Examensarbete)
+% \bachelorthesisname (Bachelor Thesis, Kandidatarbete)
+% \licentiatethesisname (Thesis for the degree of Licentiate of Engineering, Licentiatavhandling)
+% \doctoratethesisname (Thesis for the degree of Doctor of Philosophy, Doktorsavhandling)
+% \inname (in, i)
+% \listofpublicationsname (Thesis, Avhandling)
+% \papername (Paper, Artikel)
 
 \NeedsTeXFormat{LaTeX2e}
 
@@ -53,6 +106,8 @@
 
 % Set up with the required packages
 \RequirePackage{etoolbox}
+\RequirePackage{textcase}
+
 \if@gfivepaper
   \setlength{\paperwidth}{169mm}
   \setlength{\paperheight}{239mm}
@@ -65,10 +120,6 @@
 \newcommand{\chapterbreak}{}
 \titleformat{\chapter}[hang]{\bfseries\huge}{\thechapter\quad}{0em}{}
 \titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-\RequirePackage{titletoc}
-%\titlecontents{section}[1.5em]{}{\contentslabel{2.3em}}{\hspace*{-2.3em}}{\titlerule*[1pc]{.}\contentspage}
-
 
 % Parts should start a new right side page;
 \titleclass{\part}{straight}
@@ -130,7 +181,7 @@
    \def\masterthesisname{Examensarbete}%
    \def\bachelorthesisname{Kandidatarbete}%
    \def\licentiatethesisname{Licentiatavhandling}%
-   \def\licentiatethesisname{Doktorsavhandling}%
+   \def\doctoratethesisname{Doktorsavhandling}%
    \def\inname{i}%
    \def\listofpublicationsname{Avhandling}%
    \def\papername{Artikel}%
@@ -213,6 +264,10 @@
 \newcommand{\telephone}[1]{\gdef\@telephone{#1}}
 \newcommand{\postcode}[1]{\gdef\@postcode{#1}}
 
+% Section printed on the table of papers
+\newcommand{\thesiscontents}[1]{\gdef\@thesiscontents{#1}}
+\thesiscontents{This thesis consists of an extended summary and the following appended papers:}
+
 % User commands for the defence date.
 \newcommand{\opponent}[1]{\gdef\@opponent{#1}}
 \newcommand{\oppositiondate}[1]{\gdef\@oppositiondate{#1}}
@@ -256,10 +311,10 @@
   \ISSN{0346-718X}
   \def\titlepage@edge{}
   \def\titlepage@chalmerscolor{white}
-  %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
-  %\def\titlepage@logotype{Avancez_gold}
-  \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
-  \def\titlepage@logotype{Avancez_lightgold}
+  \def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  \def\titlepage@logotype{Avancez_gold}
+  %\def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  %\def\titlepage@logotype{Avancez_lightgold}
   \def\thesisname{\doctoratethesisname}
   \def\@reportseries{Doktorsavhandlingar vid Chalmers Tekniska H\"ogskola\\Ny serie nr.\ }
 \fi
@@ -289,7 +344,11 @@
  \addtocontents{top}{%
   \protect\topentry{\papernumber{paper}}{#2}
  }
- \cleardoublepage
+ \if@draft
+  \newpage
+ \else
+  \cleardoublepage
+ \fi
  % Links are always nice;
  \hypertarget{paper:\papernumber{paper}}{\mbox{}}
  \phantomsection
@@ -395,7 +454,7 @@
   \vskip 1em
   \@ifundefined{@subtitle}{}{{\@subtitle\par}}
   \vskip 1em
-  {\renewcommand{\and}{, }\MakeUppercase{\@author}\par}
+  {\renewcommand{\and}{\NoCaseChange{\\}}\MakeTextUppercase{\@author}\par} % TODO: This should be uppercase, but it's buggy, and there is no reason to use all caps.
   \vspace*{\stretch{3}}
   {\@department\par}
   \@ifundefined{@division}{}{{\textit{\@division}\par}}
@@ -467,61 +526,77 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makesecondabstractpage}{%
-  \newpage
-  \begin{otherlanguage}{\@secondarylanguage}
-    \presectiontitle{\abstractname}
-    \@secondabstract
-  \end{otherlanguage}
+ \newpage
+ \begin{otherlanguage}{\@secondarylanguage}
+  \presectiontitle{\abstractname}
+  \@secondabstract
+ \end{otherlanguage}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makededicationpage}{%
+ \if@draft
+  \newpage
+ \else
   \cleardoublepage
-  \vspace*{0.2\textheight}
-  \begin{center}\@dedication\end{center}
+ \fi
+ \vspace*{0.2\textheight}
+ \begin{center}\@dedication\end{center}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makeprefacepage}{%
+ \if@draft
+  \newpage
+ \else
   \cleardoublepage
-  \presectiontitle{\prefacename}
-  \@preface
+ \fi
+ \presectiontitle{\prefacename}
+ \@preface
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makeacknowledgementspage}{% Note: Doesn't need a new page.
-  \presectiontitle{\acknowledgementsname}
-  \@acknowledgements
+ \presectiontitle{\acknowledgementsname}
+ \@acknowledgements
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\maketableofpaperspage}{
+ \if@draft
+  \newpage
+ \else
   \cleardoublepage
-  \phantomsection
-  \presectiontitle{\listofpublicationsname}
-  \noindent This thesis consists of an extended summary and the following appended papers:
-  \tableofpapers
-  \@ifundefined{@paperwork}{}{
-    \noindent \@paperwork
-  }
+ \fi
+ \phantomsection
+ \presectiontitle{\listofpublicationsname}
+ \noindent \@thesiscontents
+ \tableofpapers
+ \@ifundefined{@paperwork}{}{
+   \noindent \@paperwork
+ }
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\maketitle}{%
- \if@cover
-  \makecoverpage
+ \if@draft\else
+  \if@cover
+   \makecoverpage
+  \fi
  \fi
 
- \maketitlepage
+ \if@draft\else
+  \maketitlepage
 
- \makeprintinfopage
+  \makeprintinfopage
+ \fi
 
  \makeabstractpage\pagestyle{plain}
 
  % Empty or second abstract
  \@ifundefined{@secondabstract}{}{
   \makesecondabstractpage
-}
+ }
 
  \@ifundefined{@dedication}{}{
   \makededicationpage
@@ -540,12 +615,20 @@
   \maketableofpaperspage
  \fi
 
- \cleardoublepage
+ \if@draft
+  \newpage
+ \else
+  \cleardoublepage
+ \fi
  \phantomsection\addcontentsline{toc}{chapter}{\contentsname}
  \tableofcontents
 
  % Sets up page numbering for the rest of the document.
- \cleardoublepage
+ \if@draft
+  \newpage
+ \else
+  \cleardoublepage
+ \fi
  \pagenumbering{arabic}
 }
 

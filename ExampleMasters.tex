@@ -13,6 +13,8 @@
 
 % change masters to bachelor if necessary
 \documentclass[masters,a4paper]{chalmers-thesis}
+% All options are; doctorate, licentiate, masters, bachelor, nocover, draft, g5paper,
+% and everything the standard report class support.
 
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8 or utf8x.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
@@ -33,11 +35,11 @@
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
 %\usepackage{siunitx} % For all your numerical values and units.
-%\usepackage{pgfplots} % Make plots directly in latex. Excellent package.
+%\usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
 %\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
 
-\usepackage{blindtext} % Package used to put in placeholder text. Remove it.
+\usepackage{lipsum}\setlipsumdefault{131-133} % Package used to put in placeholder text. Remove it.
 
 % User commands
 \title{The Title of Your Thesis which might be very long}
@@ -53,21 +55,30 @@
 \coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
 \covercaption{Some explanation}
 
-\firstabstract{\blindtext}
+\firstabstract{\lipsum}
 %\secondabstract{swedish}{\blindtext} % Optional
 \keywords{Some stuff, More stuff, Stuff}
 
-\preface{\blindtext} % You can use \input to put preface and acknowledgements in another document
-\acknowledgements{\blindtext}
+\preface{\lipsum} % You can use \input to put preface and acknowledgements in another document
+\acknowledgements{\lipsum}
 
-\bibliography{mybib}
+\bibliography{ExampleBib} % Old command
+%\addbibresource{ExampleBib} % New comnand, use if available
 
 \begin{document}
 %\selectlanguage{swedish} % Use this if you are writing your thesis in swedish.
 \maketitle
 % If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
-%\make****page
-% See chalmers-thesis.cls - \maketitle command for more details.
+%\makecoverpage
+%\maketitlepage
+%\makeprintinfopage
+%\makesecondabstractpage
+%\makededicationpage
+%\makeprefacepage
+%\makeacknowledgementspage
+%\maketableofpaperspage
+%\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\tableofcontents
+%\cleardoublepage\pagenumbering{arabic}
 
 % Highly recommended to put contents into subfiles, or use \input.
 \subfile{ExampleIntroduction}
