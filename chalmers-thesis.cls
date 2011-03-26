@@ -58,7 +58,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/03/15 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/03/26 CHALMERS Thesis class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macro for checking all required commands are set.
@@ -196,7 +196,7 @@
    \def\acknowledgementsname{Acknowledgements}%
    \def\keywordsname{Keywords}%
    \def\masterthesisname{Master's thesis}%
-   \def\bachelorthesisname{Bachelor thesis}%
+   \def\bachelorthesisname{Bachelor's thesis}%
    \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
    \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
    \def\inname{in}%
