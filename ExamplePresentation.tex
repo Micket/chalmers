@@ -1,8 +1,11 @@
-\documentclass[11pt,mathserif]{beamer} % mathserif for normal math fonts.
+\documentclass[11pt]{beamer} % mathserif for normal math fonts.
+\usefonttheme[onlymath]{serif}
 \usepackage[utf8]{inputenc}
 \usepackage[swedish,english]{babel}
 \usepackage{amsmath,mathtools}
 \usepackage{calc}
+
+\usepackage[T1]{fontenc}
 
 % The Chalmers theme:
 \usetheme[titleflower=true]{chalmers} % titleflower = true or false
@@ -17,6 +20,7 @@
 %\titlepagelogo{\tikz{\draw(0,0) circle (1);}} % or draw anything for a logo
 
 \begin{document}
+%\setlength{\footertextwidth}{0.5\paperwidth} % You might need to adjust this if the text doesn't fit well.
 
 \section{Title page} % Sections are shown at the bottom left. There is also links in many pdf-readers
 \begin{frame}[plain]

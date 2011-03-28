@@ -16,9 +16,11 @@
 \newlength{\headerheight}
 \newlength{\footerheight}
 \newlength{\titlepageheight}
+\newlength{\footertextwidth}
 \setlength{\headerheight}{0.04\paperheight}
 \setlength{\footerheight}{0.04\paperheight}
 \setlength{\titlepageheight}{0.4\paperheight}
+\setlength{\footertextwidth}{0.5\paperwidth}
 
 % New command for manually inserting the footer. Default is the authors.
 \newcommand{\footer}[1]{\def\insertfooter{#1}}
@@ -160,7 +162,7 @@
     \ifx\insertsubsectionhead\@empty\else---\ \insertsubsectionhead\fi%
     \ifx\insertsubsubsectionhead\@empty\else---\ \insertsubsubsectionhead\fi};
   % Right side footer.
-  \node[right] at (0.5\paperwidth,0.5\footerheight) {\usebeamerfont{foot}\insertfooter};
+  \node[right] at (\footertextwidth,0.5\footerheight) {\usebeamerfont{foot}\insertfooter};
   % frame/total frames
   \node[left] at (\paperwidth,0.5\footerheight) {\usebeamerfont{foot}\insertframenumber/\inserttotalframenumber};
  \end{tikzpicture}
