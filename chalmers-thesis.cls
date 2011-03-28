@@ -10,6 +10,12 @@
 % g5paper - Sets the paper dimensions to 239mm * 169mm
 % All options are also passed the standard report class.
 
+%% User commands
+% \paper{title}{reference}
+% \tableofpapers                      - Called by maketitle
+% \presectiontitle
+
+
 %% Input commands (self-explanatory).
 % \author{Authors separated with \and}
 % \title{text}
@@ -155,7 +161,7 @@
 
  % Check and set up biblatex
  \@ifpackageloaded{biblatex}{
-  \defbibheading{bibliography}[\refname]{\section*{#1}} % Sets the heading for the bibliography
+  \defbibheading{bibliography}[\refname]{\chapter*{#1}} % Sets the heading for the bibliography
   }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
 
  % Figure captions
@@ -509,7 +515,6 @@
  \@checkifdefined{keywords}
 
  \newpage
- \setcounter{page}{1}
  \pagenumbering{roman}
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
@@ -579,6 +584,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\maketitle}{%
+ \setcounter{page}{-100} % Necessary to give the first pages a unique identifier using hyperref.
  \if@draft\else
   \if@cover
    \makecoverpage
