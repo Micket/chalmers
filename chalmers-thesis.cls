@@ -4,7 +4,7 @@
 %% Some words are translated to swedish if babel langauge is set, otherwise default to English
 
 %% Class options;
-% doctorate, licentiate, masters, bachelor - Sets the type of thesis accordingly
+% doctorate, licentiate, masters, bachelors - Sets the type of thesis accordingly
 % nocover - Do not print the cover in \maketitle.
 % draft - Makes \maketitle more compact, skipping unecessary blanks
 % g5paper - Sets the paper dimensions to 239mm * 169mm
@@ -56,7 +56,7 @@
 % \acknowledgementsname (Acknowledgements, Tacks\"agelse)
 % \keywordsname (Keywords, Nyckelord)
 % \masterthesisname (Master's Thesis, Examensarbete)
-% \bachelorthesisname (Bachelor Thesis, Kandidatarbete)
+% \bachelorsthesisname (Bachelor's Thesis, Kandidatarbete)
 % \licentiatethesisname (Thesis for the degree of Licentiate of Engineering, Licentiatavhandling)
 % \doctoratethesisname (Thesis for the degree of Doctor of Philosophy, Doktorsavhandling)
 % \inname (in, i)
@@ -75,35 +75,35 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conditionals
-\newif\if@bachelor
+\newif\if@bachelors
 \newif\if@masters
 \newif\if@licentiate
 \newif\if@doctorate
-\newif\if@bachelorormasters
+\newif\if@bachelorsormasters
 \newif\if@cover
 \newif\if@draft
 \newif\if@gfivepaper
 
-\@bachelorfalse
+\@bachelorsfalse
 \@mastersfalse
 \@licentiatefalse
 \@doctoratefalse
-\@bachelorormastersfalse
+\@bachelorsormastersfalse
 \@covertrue
 \@draftfalse
 \@gfivepaperfalse
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Options of class
-% bachelor, masters, licentiate, doctorate, nocover, g5paper
-\DeclareOption{bachelor}{\global\@bachelortrue
+% bachelors, masters, licentiate, doctorate, nocover, g5paper
+\DeclareOption{bachelors}{\global\@bachelorstrue
   \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse}
 \DeclareOption{masters}{\global\@masterstrue
-  \global\@bachelorfalse\global\@licentiatefalse\global\@doctoratefalse}
+  \global\@bachelorsfalse\global\@licentiatefalse\global\@doctoratefalse}
 \DeclareOption{licentiate}{\global\@licentiatetrue
-  \global\@bachelorfalse\global\@mastersfalse\global\@doctoratefalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
-  \global\@bachelorfalse\global\@mastersfalse\global\@licentiatefalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse}
 \DeclareOption{nocover}{\global\@coverfalse}
 \DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
 \DeclareOption{g5paper}{\global\@gfivepapertrue}
@@ -186,7 +186,7 @@
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
    \def\masterthesisname{Examensarbete}%
-   \def\bachelorthesisname{Kandidatarbete}%
+   \def\bachelorsthesisname{Kandidatarbete}%
    \def\licentiatethesisname{Licentiatavhandling}%
    \def\doctoratethesisname{Doktorsavhandling}%
    \def\inname{i}%
@@ -203,7 +203,7 @@
    \def\acknowledgementsname{Acknowledgements}%
    \def\keywordsname{Keywords}%
    \def\masterthesisname{Master's thesis}%
-   \def\bachelorthesisname{Bachelor's thesis}%
+   \def\bachelorsthesisname{Bachelor's thesis}%
    \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
    \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
    \def\inname{in}%
@@ -285,18 +285,18 @@
 \telephone{+46 (0)31-772 1000}
 
 % Thesis specific settings
-\if@bachelor
-  \global\@bachelorormasterstrue
+\if@bachelors
+  \global\@bachelorsormasterstrue
   \ISSN{1654-4676}
   \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
   \def\titlepage@bg{}
   \def\titlepage@logotype{Avancez_invert}
-  \def\thesisname{\bachelorthesisname}
+  \def\thesisname{\bachelorsthesisname}
   \def\@reportseries{\thesisname\ \inname\ \@thesisin}
 \fi
 \if@masters
-  \global\@bachelorormasterstrue
+  \global\@bachelorsormasterstrue
   \ISSN{1652-8557}
   \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
@@ -425,7 +425,7 @@
  \end{center}
  {\huge\noindent\@title\par} % title, 21
  \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
- {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor and master's)
+ {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \vskip 1em
  {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
  \vskip 1em
@@ -433,7 +433,7 @@
   \@ifundefined{@division}{}{\textit{\@division}\\}
   \MakeUppercase{\universityname}\\
   \cityname, \countryname\ \@copyrightyear
-  \if@bachelorormasters
+  \if@bachelorsormasters
     \\ \thesisname\ \@reportno \fi
   \par}
 
@@ -618,7 +618,7 @@
  }
 
  % If its a doctorate or licentiate thesis, include the table of papers.
- \if@bachelorormasters\else
+ \if@bachelorsormasters\else
   \maketableofpaperspage
  \fi
 
