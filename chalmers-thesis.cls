@@ -12,9 +12,10 @@
 
 %% User commands
 % \paper{title}{reference}
-% \tableofpapers                      - Called by maketitle
-% \presectiontitle
-
+% \tableofpapers                      - Called by \maketitle
+% \topentry{title}{reference}         - Called by \tableofpapers
+% \papernumber                        - Defined to \Alph (can be redefined)
+% \presectiontitle                    - Called by \maketitle
 
 %% Input commands (self-explanatory).
 % \author{Authors separated with \and}
@@ -64,7 +65,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/03/26 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/03/29 CHALMERS Thesis class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macro for checking all required commands are set.
@@ -518,7 +519,7 @@
  \pagenumbering{roman}
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
-  \thesisname\ \inname \@thesisin\\
+  \thesisname\ \inname\ \@thesisin\\
    {\renewcommand{\and}{\\}\MakeUppercase{\@author}}\\
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
