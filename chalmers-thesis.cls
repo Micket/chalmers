@@ -318,10 +318,12 @@
   \ISSN{0346-718X}
   \def\titlepage@edge{}
   \def\titlepage@chalmerscolor{white}
-  \def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
-  \def\titlepage@logotype{Avancez_gold}
-  %\def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
-  %\def\titlepage@logotype{Avancez_lightgold}
+  % The chalmers_blue is supposely the correct one, but it doesn't match at all.
+  %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  %\def\titlepage@logotype{Avancez_gold}
+  % These colors are taken from the example covers, might lighter colors (looks closer to the printed version).
+  \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  \def\titlepage@logotype{Avancez_lightgold}
   \def\thesisname{\doctoratethesisname}
   \def\@reportseries{Doktorsavhandlingar vid Chalmers Tekniska H\"ogskola\\Ny serie nr.\ }
 \fi
@@ -424,11 +426,13 @@
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
  {\huge\noindent\@title\par} % title, 21
- \@ifundefined{@subtitle}{}{{\large\noindent\@subtitle\par}} % subtitle, 16
+ \@ifundefined{@subtitle}{}{{\Large\noindent\@subtitle\par}} % subtitle, 16
+ \if@bachelorsormasters
  {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
- \vskip 1em
+ \fi
+ \vskip 1.5em
  {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
- \vskip 1em
+ \vskip 1.5em
  {\small\noindent\@department\\
   \@ifundefined{@division}{}{\textit{\@division}\\}
   \MakeUppercase{\universityname}\\
