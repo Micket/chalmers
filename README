@@ -1,3 +1,8 @@
-No files with the Example prefix are necessary, but recommended to include as they serve as documentation.
+* THIS IS A BETA RELEASE! This release is meant to collect opinions and bugs from users at Chalmers.
+  If you find something odd, wrong or lacking, please email me; Mikael Öhman <mikael.ohman@chalmers.se>
 
-Sources for images comes from src_figures which aren't necessary for end users of the themes.
+* These files have been distributed through: http://www.github.com/Micket/chalmers
+
+* No files with the Example prefix are necessary, but recommended to include as they serve as documentation.
+
+* Sources for images comes from src_figures which aren't necessary for end users of the themes.
