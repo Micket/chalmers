@@ -6,3 +6,17 @@
 * No files with the Example prefix are necessary, but recommended to include as they serve as documentation.
 
 * Sources for images comes from src_figures which aren't necessary for end users of the themes.
+
+* If you are using the Chalmers linux system, you need to add texlive 2009 which is in unsup. In short, add this line
+  . /chalmers/sw/unsup/texlive/bashrc.inc
+  to 
+  ~/.bashrc
+  or
+  ~/.profile
+  The file contains paths to the newer version of latex. 
+
+* subfiles is not in texlive yet. If you wish to use it, run latex on the *.ins file and copy everything to
+  ~/texmf/tex/latex/subfiles/
+  Subfiles package is available at 
+  http://www.ctan.org/tex-archive/macros/latex/contrib/subfiles
+
