@@ -539,12 +539,21 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trick to fully expand the argument
+\newenvironment{Otherlanguage}[1]{%
+  \begingroup
+  \edef\temp{\endgroup\noexpand\otherlanguage{#1}}%
+  \temp
+}{\endotherlanguage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\makesecondabstractpage}{%
+ \@checkifdefined{secondarylanguage}
+ \@checkifdefined{secondabstract}
  \newpage
- \begin{otherlanguage}{\@secondarylanguage}
+ \begin{Otherlanguage}{swedish}
   \presectiontitle{\abstractname}
   \@secondabstract
- \end{otherlanguage}
+ \end{Otherlanguage}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
