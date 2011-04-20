@@ -55,7 +55,7 @@
 %% The predefined babel translations;
 % \countryname (Swedish, Sverige)
 % \telephonename (Telephone, Telefon)
-% \universityname (Chalmers University of Technology, Chalmers Tekniska H\"ogskola)
+% \universityname (Chalmers University of Technology, Chalmers tekniska h\"ogskola)
 % \covername (Cover, Omslag)
 % \acknowledgementsname (Acknowledgements, Tacks\"agelse)
 % \keywordsname (Keywords, Nyckelord)
@@ -69,7 +69,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/03/29 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/04/20 CHALMERS Thesis class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macro for checking all required commands are set.
@@ -185,7 +185,7 @@
    \def\countryname{Sverige}%
    \def\cityname{G\"oteborg}%
    \def\telephonename{Telefon}%
-   \def\universityname{Chalmers Tekniska H\"ogskola}%
+   \def\universityname{Chalmers tekniska h\"ogskola}%
    \def\covername{Omslag}%
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
@@ -329,7 +329,7 @@
   \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_lightgold}
   \def\thesisname{\doctoratethesisname}
-  \def\@reportseries{Doktorsavhandlingar vid Chalmers Tekniska H\"ogskola\\Ny serie nr.\ }
+  \def\@reportseries{Doktorsavhandlingar vid Chalmers tekniska h\"ogskola\\Ny serie nr.\ }
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
