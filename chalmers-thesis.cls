@@ -67,9 +67,13 @@
 % \listofpublicationsname (Thesis, Avhandling)
 % \papername (Paper, Artikel)
 
+%% Other
+% \presectiontitle{text} - Used for printing titles in the frontmatter
+% \presectiontitlestyle{text} - Can be redefined to change the style of the front matter
+
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesClass{chalmers-thesis}[2011/04/20 CHALMERS Thesis class]
+\ProvidesClass{chalmers-thesis}[2011/04/21 CHALMERS Thesis class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macro for checking all required commands are set.
