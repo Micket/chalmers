@@ -22,9 +22,8 @@
 
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
-\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. (already available in miktex, but not in texlive)
-% Can be downloaded at: http://www.ctan.org/tex-archive/macros/latex/contrib/subfiles
-\usepackage{hyperref} % Highly recommended for in document links and document metadata.
+\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
+\usepackage{hyperref} % Required for in document links and document metadata.
 \usepackage[swedish, english]{babel}
 
 % More or less required packages
@@ -34,6 +33,7 @@
 \usepackage{tikz} % Draw figures. Required for cover page
 \usepackage{subfig} % Subfloats
 
+\usepackage{titletoc}
 % Read the manuals for the respective package to see the usage;
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
@@ -43,13 +43,12 @@
 %\usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
 %\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-%\usepackage{pdfpages} % For included other pdf files (like articles).
 
 \usepackage{lipsum}\setlipsumdefault{1-3} % Package used to put in placeholder text. Remove it.
 
 % User commands
 \title{The Title of Your Thesis which might be very long}
-\subtitle{And Perhaps a Subtitle}
+\subtitle{And Perhaps a Subtitle} % Optional
 \author{Some Author\and Other Author}
 \thesisin{Solid and Structural Mechanics}
 \department{Department of Applied Mechanics}
@@ -68,8 +67,12 @@
 \preface{\lipsum} % You can use \input to put preface and acknowledgements in another document
 \acknowledgements{\lipsum}
 
-\bibliography{ExampleBib} % Old command
-%\addbibresource{ExampleBib} % New comnand, use if available
+% You can add extra contents such as abbreviations and nomenclature using.
+% Use \presectiontitle to render add titles to new sections.
+\extrafrontmatter{\presectiontitle{Nomenclature} \lipsum} % Optional
+
+\addbibresource{ExampleBib.bib} % New comnand, use if available
+%\bibliography{ExampleBib} % Legacy command
 
 \begin{document}
 %\selectlanguage{swedish} % Use this if you are writing your thesis in swedish.
@@ -83,7 +86,7 @@
 %\makeprefacepage
 %\makeacknowledgementspage
 %\maketableofpaperspage
-%\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\tableofcontents
+%\cleardoublepage\tableofcontents
 %\cleardoublepage\pagenumbering{arabic}
 
  % Sets up page numbering for the rest of the document.

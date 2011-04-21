@@ -200,7 +200,7 @@
  
   \addto\captionsenglish{%
    \def\countryname{Sweden}%
-   \def\cityname{G\"oteborg}%
+   \def\cityname{Gothenburg}%
    \def\telephonename{Telephone}%
    \def\universityname{Chalmers University of Technology}%
    \def\covername{Cover}%
@@ -236,7 +236,7 @@
     linkcolor  = black,
     filecolor  = black,
   }
- }{\ClassError{chalmers-thesis}{Package 'hyperref' required}{}}
+ }{\ClassWarning{chalmers-thesis}{Package 'hyperref' required}{}}
 }
 
 % Needs to be at the end since its language dependent.
@@ -268,6 +268,8 @@
 \newcommand{\division}[1]{\gdef\@division{#1}}
 \newcommand{\thesisin}[1]{\gdef\@thesisin{#1}}
 \newcommand{\paperwork}[1]{\gdef\@paperwork{#1}}
+
+\newcommand{\extrafrontmatter}[1]{\gdef\@extrafrontmatter{#1}}
 
 % User commands which shouldn't need to be set.
 \newcommand{\ISSN}[1]{\gdef\@ISSN{#1}}
@@ -393,10 +395,21 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Command for the title.
+% Renew the table of contents title to fit the rest of the frontmatter
+\renewcommand{\tableofcontents}{
+ %\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\section*{\contentsname}
+ \presectiontitle{\contentsname}
+ \vskip 1em
+ \@starttoc{toc}
+ \vskip 1em
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Command for the titles.
+\newcommand{\presectiontitlestyle}[1]{\begin{center}\Large\textsc{#1}\end{center}}
 \newcommand{\presectiontitle}[1]{
   \phantomsection\addcontentsline{toc}{chapter}{#1}
-  \begin{center}\Large\textsc{#1}\end{center}
+  \presectiontitlestyle{#1}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -634,6 +647,11 @@
   \makeacknowledgementspage
  }
 
+ \@ifundefined{@extrafrontmatter}{}{
+  \cleardoublepage
+  \@extrafrontmatter
+ }
+
  % If its a doctorate or licentiate thesis, include the table of papers.
  \if@bachelorsormasters\else
   \maketableofpaperspage
@@ -644,7 +662,6 @@
  \else
   \cleardoublepage
  \fi
- \phantomsection\addcontentsline{toc}{chapter}{\contentsname}
  \tableofcontents
 
  % Sets up page numbering for the rest of the document.

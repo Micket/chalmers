@@ -16,15 +16,14 @@
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
 % change doctorate to licentiate if necessary
-\documentclass[doctorate,g5paper]{chalmers-thesis}
+\documentclass[doctorate,a5paper]{chalmers-thesis}
 % All options are; doctorate, licentiate, masters, bachelors, nocover, draft, g5paper,
 % and everything the standard report class support.
 
 \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
 \usepackage{microtype} % Magically improves typesetting for pdflatex
-\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. (already available in miktex, but not in texlive)
-% Can be downloaded at: http://www.ctan.org/tex-archive/macros/latex/contrib/subfiles
-\usepackage{hyperref} % Highly recommended for in document links and document metadata.
+\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
+\usepackage{hyperref} % Required for in document links and document metadata.
 \usepackage[swedish, english]{babel}
 
 % More or less required packages
@@ -35,6 +34,7 @@
 \usepackage{subfig} % Subfloats
 
 % Read the manuals for the respective package to see the usage;
+%\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
@@ -43,7 +43,6 @@
 %\usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
 %\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
-%\usepackage{pdfpages} % For included other pdf files (like articles).
 
 \usepackage{lipsum}\setlipsumdefault{1-3} % Package used to put in placeholder text. Remove it.
 
@@ -59,7 +58,7 @@
 \copyrightyear{2011}
 
 \opponent{
-Dr. Alban\\
+Dr.~Alban\\
 Department of Pop\\
 University of Somewhere\\
 Nigeria
@@ -79,14 +78,19 @@ Nigeria
 \dedication{\textit{to my dear mother.}}
 \paperwork{\lipsum}
 
+% You can add extra contents such as abbreviations and nomenclature using.
+% Use \presectiontitle to render add titles to new sections.
+\extrafrontmatter{\presectiontitle{Nomenclature} \lipsum} % Optional
+
 %\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
 %\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
 
-\bibliography{ExampleBib} % Old command 
-%\addbibresource{ExampleBib} % New comnand, use if available
+\addbibresource{ExampleBib.bib} % New comnand, use if available
+%\bibliography{ExampleBib} % Legacy command
 
 \begin{document}
-%\selectlanguage{swedish}
+ \makethesisdefence % Should be printed at a5paper size
+ \end{document}
 \maketitle
 % If you need to do any modifcations, you can redefine each page respectively, or just call them manually as;
 %\makecoverpage
@@ -97,7 +101,7 @@ Nigeria
 %\makeprefacepage
 %\makeacknowledgementspage
 %\maketableofpaperspage
-%\cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\tableofcontents
+%\cleardoublepage\tableofcontents
 %\cleardoublepage\pagenumbering{arabic}
 
 \part{Extended Summary} % Using the starred command avoids numbering.
