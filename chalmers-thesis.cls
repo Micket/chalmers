@@ -12,7 +12,7 @@
 % nocover - Do not print the cover in \maketitle.
 % draft - Makes \maketitle more compact, skipping unecessary blanks
 % g5paper - Sets the paper dimensions to 239mm * 169mm
-% university - Joint work for Chalmers + GU
+% gu - Joint work for Chalmers + GU
 % All options are also passed the standard report class.
 
 %% User commands
@@ -116,7 +116,7 @@
   \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
   \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse}
-\DeclareOption{university}{\global\@universitytrue}
+\DeclareOption{gu}{\global\@universitytrue}
 \DeclareOption{nocover}{\global\@coverfalse}
 \DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
 \DeclareOption{g5paper}{\global\@gfivepapertrue}
@@ -309,6 +309,7 @@
   \def\titlepage@chalmerscolor{black}
   \def\titlepage@bg{}
   \def\titlepage@logotype{Avancez_invert}
+  \def\titlepage@chagu{Cha_GU_blue_eng}
   \def\thesisname{\bachelorsthesisname}
   \def\@reportseries{\thesisname}
 \fi
@@ -320,6 +321,7 @@
   \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_white}
   \def\thesisname{\masterthesisname}
+  \def\titlepage@chagu{Cha_GU_bluewhite_eng}
   \def\@reportseries{\thesisname}
 \fi
 \if@licentiate
@@ -328,6 +330,7 @@
   \def\titlepage@chalmerscolor{white}
   \def\titlepage@bg{\fill[chalmers_grey] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_black}
+  \def\titlepage@chagu{Cha_GU_black_eng}
   \def\thesisname{\licentiatethesisname}
   \def\@reportseries{\thesisname}
 \fi
@@ -341,6 +344,7 @@
   % These colors are taken from the example covers, might lighter colors (looks closer to the printed version).
   \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_lightgold}
+  \def\titlepage@chagu{Cha_GU_white_eng}
   \def\thesisname{\doctoratethesisname}
   \def\@reportseries{Doktorsavhandlingar vid Chalmers tekniska h\"ogskola\\Ny serie nr.\ }
 \fi
@@ -444,7 +448,7 @@
                  (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
      \titlepage@bg
      \if@university
-      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight,inner sep=0]{\includegraphics[width=0.8\paperwidth]{figures/Cha_GUviteng}};
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.55\headerheight,inner sep=0]{\includegraphics[width=0.8\paperwidth]{figures/\titlepage@chagu}};
      \else
       \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
       \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
@@ -567,7 +571,9 @@
    {\renewcommand{\and}{\\}\MakeUppercase{\@author}}\\
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
-  \universityname\par}
+  \universityname
+  \if@university\\\seconduniversityname\fi
+ \par}
  \presectiontitle{\abstractname}
  \@firstabstract
  \vskip 1em
