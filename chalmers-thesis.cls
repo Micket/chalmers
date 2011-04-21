@@ -12,6 +12,7 @@
 % nocover - Do not print the cover in \maketitle.
 % draft - Makes \maketitle more compact, skipping unecessary blanks
 % g5paper - Sets the paper dimensions to 239mm * 169mm
+% university - Joint work for Chalmers + GU
 % All options are also passed the standard report class.
 
 %% User commands
@@ -56,6 +57,7 @@
 % \countryname (Swedish, Sverige)
 % \telephonename (Telephone, Telefon)
 % \universityname (Chalmers University of Technology, Chalmers tekniska h\"ogskola)
+% \seconduniversityname (University of Gothenburg, Göteborgs universitet)
 % \covername (Cover, Omslag)
 % \acknowledgementsname (Acknowledgements, Tacks\"agelse)
 % \keywordsname (Keywords, Nyckelord)
@@ -87,11 +89,13 @@
 \newif\if@masters
 \newif\if@licentiate
 \newif\if@doctorate
+\newif\if@university
 \newif\if@bachelorsormasters
 \newif\if@cover
 \newif\if@draft
 \newif\if@gfivepaper
 
+\@universityfalse
 \@bachelorsfalse
 \@mastersfalse
 \@licentiatefalse
@@ -112,6 +116,7 @@
   \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
   \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse}
+\DeclareOption{university}{\global\@universitytrue}
 \DeclareOption{nocover}{\global\@coverfalse}
 \DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
 \DeclareOption{g5paper}{\global\@gfivepapertrue}
@@ -190,6 +195,7 @@
    \def\cityname{G\"oteborg}%
    \def\telephonename{Telefon}%
    \def\universityname{Chalmers tekniska h\"ogskola}%
+   \def\seconduniversityname{Göteborgs universitet}%
    \def\covername{Omslag}%
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
@@ -207,6 +213,7 @@
    \def\cityname{Gothenburg}%
    \def\telephonename{Telephone}%
    \def\universityname{Chalmers University of Technology}%
+   \def\seconduniversityname{University of Gothenburg}%
    \def\covername{Cover}%
    \def\acknowledgementsname{Acknowledgements}%
    \def\keywordsname{Keywords}%
@@ -436,11 +443,17 @@
                  .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
                  (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
      \titlepage@bg
-     \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
-     \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{% 3.6cm
-        figures/\titlepage@logotype
-     }};
+     \if@university
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight,inner sep=0]{\includegraphics[width=0.8\paperwidth]{figures/Cha_GUviteng}};
+     \else
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
+      \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
+     \fi
    \end{tikzpicture}};
+   \if@university
+    \node[anchor=south east,xshift=-0.1\paperwidth,yshift=0.1\paperheight,inner sep=0] at (current page.south east)
+     {\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
+   \fi
  \end{tikzpicture}
  \ \vfill
  \begin{center}
@@ -457,6 +470,9 @@
  {\small\noindent\@department\\
   \@ifundefined{@division}{}{\textit{\@division}\\}
   \MakeUppercase{\universityname}\\
+  \if@university
+   \MakeUppercase{\seconduniversityname}\\
+  \fi
   \cityname, \countryname\ \@copyrightyear
   \if@bachelorsormasters
     \\ \thesisname\ \@reportno \fi
@@ -486,11 +502,14 @@
   \vskip 1em
   \@ifundefined{@subtitle}{}{{\@subtitle\par}}
   \vskip 1em
-  {\renewcommand{\and}{\NoCaseChange{\\}}\MakeTextUppercase{\@author}\par} % TODO: This should be uppercase, but it's buggy, and there is no reason to use all caps.
+  {\renewcommand{\and}{\NoCaseChange{\\}}\MakeTextUppercase{\@author}\par}
   \vspace*{\stretch{3}}
   {\@department\par}
   \@ifundefined{@division}{}{{\textit{\@division}\par}}
-  {\MakeUppercase{\universityname}\par}
+  {\MakeUppercase{\universityname}
+   \if@university
+    \\\MakeUppercase{\seconduniversityname}
+   \fi\par}
   \vskip 0.5em
   {\cityname, \countryname\ \@copyrightyear\par}
  \end{center}
