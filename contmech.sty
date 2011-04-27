@@ -10,13 +10,13 @@
 \newcommand{\louterp}{\mathbin{\underline{\otimes}}} % Lower outer product
 
 % Tensors
-\renewcommand{\ta}[1]{\boldsymbol{#1}} % First order tensor. Bold, cursive
+\newcommand{\ta}[1]{\boldsymbol{#1}} % First order tensor. Bold, cursive
 %\newcommand{\ts}[1]{\boldsymbol{\mathrm{#1}}} % Second order tensor. Bold, straigt
 \newcommand{\ts}[1]{\boldsymbol{#1}} % Second order tensor. Bold, cursive
 \newcommand{\td}[1]{\boldsymbol{\mathcal{#1}}} % Third order tensor. Bold, caligraphy
 \newcommand{\tf}[1]{\boldsymbol{\mathsf{#1}}} % Fourth order tensor. Bold, sans-serif
 
-\renewcommand{\vec}[1]{\underline{#1}} % Vectors
+\newcommand{\vect}[1]{\underline{#1}} % Vectors
 \newcommand{\mat}[1]{\underline{#1}} % Matrices (even if they are the same, keep them seperate if you ever wish to change it.
 
 \newcommand{\set}[1]{\mathbb{#1}} % For defining sets
@@ -50,10 +50,10 @@
 \newcommand{\Neumann}{\mathrm{N}}
 
 % For typing out second order base indicies conveniently
-\newcommand{\be}[1]{\to{e}_{#1}}
-\newcommand{\bee}[2]{\to{e}_{#1}\otimes\to{e}_{#2}}
-\newcommand{\beee}[3]{\to{e}_{#1}\otimes\to{e}_{#2}\otimes\to{e}_{#3}}
-\newcommand{\beeee}[4]{\to{e}_{#1}\otimes\to{e}_{#2}\otimes\to{e}_{#3}\otimes\to{e}_{#4}}
+\newcommand{\be}[1]{\ta{e}_{#1}}
+\newcommand{\bee}[2]{\ta{e}_{#1}\otimes\ta{e}_{#2}}
+\newcommand{\beee}[3]{\ta{e}_{#1}\otimes\ta{e}_{#2}\otimes\ta{e}_{#3}}
+\newcommand{\beeee}[4]{\ta{e}_{#1}\otimes\ta{e}_{#2}\otimes\ta{e}_{#3}\otimes\ta{e}_{#4}}
 
 % Outer math commands;
 \newcommand{\defeq}{\overset{\mathrm{def}}{=}} % For definitions X \defeq Y + 1
