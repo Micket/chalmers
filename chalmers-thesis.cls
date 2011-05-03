@@ -1,5 +1,4 @@
-% THIS IS A BETA RELEASE! This release is meant to collect opinions and bugs from users at Chalmers.
-% If you find something odd, wrong or lacking, please email me; Mikael Öhman <mikael.ohman@chalmers.se>
+% If you find something odd, wrong or lacking, you can email me at; Mikael Öhman <mikael.ohman@chalmers.se>
 % This file has been distributed through: http://www.github.com/Micket/chalmers
 
 %% Thesis class template for Chalmers University of Technology.
