@@ -11,6 +11,7 @@
 *.ps
 *.bbl
 *.toc
+*.run.xml
 *~
 *.backup
 *.mat
