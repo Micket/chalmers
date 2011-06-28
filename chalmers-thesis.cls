@@ -7,7 +7,7 @@
 %% Some words are translated to swedish if babel langauge is set, otherwise default to English
 
 %% Class options;
-% doctorate, licentiate, masters, bachelors - Sets the type of thesis accordingly
+% doctorate, licentiate, masters, bachelors, techreport - Sets the type of thesis accordingly
 % nocover - Do not print the cover in \maketitle.
 % draft - Makes \maketitle more compact, skipping unecessary blanks
 % g5paper - Sets the paper dimensions to 239mm * 169mm
@@ -88,6 +88,7 @@
 \newif\if@masters
 \newif\if@licentiate
 \newif\if@doctorate
+\newif\if@techreport
 \newif\if@university
 \newif\if@bachelorsormasters
 \newif\if@cover
@@ -99,6 +100,7 @@
 \@mastersfalse
 \@licentiatefalse
 \@doctoratefalse
+\@techreportfalse
 \@bachelorsormastersfalse
 \@covertrue
 \@draftfalse
@@ -108,13 +110,15 @@
 %% Options of class
 % bachelors, masters, licentiate, doctorate, nocover, g5paper
 \DeclareOption{bachelors}{\global\@bachelorstrue
-  \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse}
+  \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse}
 \DeclareOption{masters}{\global\@masterstrue
-  \global\@bachelorsfalse\global\@licentiatefalse\global\@doctoratefalse}
+  \global\@bachelorsfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse}
 \DeclareOption{licentiate}{\global\@licentiatetrue
-  \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse\global\@techreportfalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
-  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@techreportfalse}
+\DeclareOption{techreport}{\global\@techreporttrue
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse}
 \DeclareOption{gu}{\global\@universitytrue}
 \DeclareOption{nocover}{\global\@coverfalse}
 \DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
@@ -202,6 +206,7 @@
    \def\bachelorsthesisname{Kandidatarbete}%
    \def\licentiatethesisname{Licentiatavhandling}%
    \def\doctoratethesisname{Doktorsavhandling}%
+   \def\techreportname{Teknisk rapport}%
    \def\inname{i}%
    \def\listofpublicationsname{Avhandling}%
    \def\papername{Artikel}%
@@ -220,6 +225,7 @@
    \def\bachelorsthesisname{Bachelor's thesis}%
    \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
    \def\doctoratethesisname{Thesis for the degree of Doctor of Philosophy}%
+   \def\techreportname{Technical report}%
    \def\inname{in}%
    \def\listofpublicationsname{Thesis}%
    \def\papername{Paper}%
@@ -341,11 +347,21 @@
   %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   %\def\titlepage@logotype{Avancez_gold}
   % These colors are taken from the example covers, might lighter colors (looks closer to the printed version).
-  \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  \def\titlepage@bg{\fill[red] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_lightgold}
   \def\titlepage@chagu{Cha_GU_white_eng}
   \def\thesisname{\doctoratethesisname}
   \def\@reportseries{Doktorsavhandlingar vid Chalmers tekniska h\"ogskola\\Ny serie nr.\ }
+\fi
+\if@techreport
+  \ISSN{1652-8549}
+  \def\titlepage@edge{draw}
+  \def\titlepage@chalmerscolor{black}
+  \def\titlepage@bg{}
+  \def\titlepage@logotype{Avancez_invert}
+  \def\titlepage@chagu{Cha_GU_blue_eng}
+  \def\thesisname{\techreportname}
+  \def\@reportseries{\thesisname}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -681,9 +697,9 @@
  }
 
  % If its a doctorate or licentiate thesis, include the table of papers.
- \if@bachelorsormasters\else
+ \if@bachelorsormasters\else\if@techreport\else
   \maketableofpaperspage
- \fi
+ \fi\fi
 
  \if@draft
   \newpage
