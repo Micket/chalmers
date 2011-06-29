@@ -325,8 +325,8 @@
   \def\titlepage@chalmerscolor{black}
   \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_white}
-  \def\thesisname{\masterthesisname}
   \def\titlepage@chagu{Cha_GU_bluewhite_eng}
+  \def\thesisname{\masterthesisname}
   \def\@reportseries{\thesisname}
 \fi
 \if@licentiate
@@ -357,9 +357,9 @@
   \ISSN{1652-8549}
   \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
-  \def\titlepage@bg{}
-  \def\titlepage@logotype{Avancez_invert}
-  \def\titlepage@chagu{Cha_GU_blue_eng}
+  \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
+  \def\titlepage@logotype{Avancez_white}
+  \def\titlepage@chagu{Cha_GU_bluewhite_eng}
   \def\thesisname{\techreportname}
   \def\@reportseries{\thesisname}
 \fi
