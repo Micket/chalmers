@@ -178,7 +178,7 @@
 
  % Check and set up biblatex
  \@ifpackageloaded{biblatex}{
-  \defbibheading{bibliography}[\refname]{\chapter*{#1}} % Sets the heading for the bibliography
+  \defbibheading{bibliography}[\refname]{\addcontentsline{toc}{chapter}{#1}\chapter*{#1}} % Sets the heading for the bibliography
   }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
 
  % Figure captions
