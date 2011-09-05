@@ -19,3 +19,5 @@
   Subfiles package is available at 
   http://www.ctan.org/tex-archive/macros/latex/contrib/subfiles
 
+* Template should work with either lualatex (possible xelatex) or pdflatex. With a recent version of lualatex installed,
+  it should be preferred as it will give smaller files with nicer fonts (and more features).
