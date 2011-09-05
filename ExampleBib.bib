@@ -4,7 +4,9 @@ for detailed descriptions on every possible entry type and field.
 
 Put in the full names. Abbreviations are controlled by the bibstyle.
 skipbib option can be used to exclude entry from the bibliography.
+Journal titles must be abbreviated manually using shortjournal.
 
+% By simply not giving a shortjournal input, the full journal will be written.
 @Article{ paper:A,
   author          = {João C. Pombo and Jorge A.C. Ambrósio},
   shortauthor     = {J. Pombo and others},
@@ -13,7 +15,9 @@ skipbib option can be used to exclude entry from the bibliography.
   year            = {2008},
   journaltitle    = {Multibody System Dynamics},
   volume          = {19},
+  number          = {F4},
   pages           = {91--114},
+  doi             = {10.1007/s11044-007-9094-y},
   options         = {skipbib=true},
 }
 
@@ -24,8 +28,21 @@ skipbib option can be used to exclude entry from the bibliography.
   year            = {1997},
   journaltitle    = {Nonlinear Dynamics},
   volume          = {13},
+  number          = {37},
   pages           = {117--129},
+  doi             = {abc-123123123123123},
   options         = {skipbib=true},
+}
+
+@Article{ kzfmodel_hanjalic2004,
+  author          = {Kemal Hanjalic and others},
+  title           = {A robust near-wall elliptic-relaxation eddy-viscosity turbulence model for CFD},
+  publisher       = {Elsevier},
+  year            = {2004},
+  journaltitle    = {International Journal of Heat and Fluid Flow},
+  shortjournal    = {Int. J. Heat Fluid Flow},
+  volume          = {25},
+  pages           = {1047--1051},
 }
 
 @Manual{ matlab:ode,
@@ -35,16 +52,6 @@ skipbib option can be used to exclude entry from the bibliography.
   subtitle        = {Ordinary Differential Equations},
   version         = {7.8},
   url             = {http://www.mathworks.com/access/helpdesk/help/techdoc/ref/ode45.html},
-}
-
-@Article{ kzfmodel_hanjalic2004,
-  author          = {Kemal Hanjalic and others},
-  title           = {A robust near-wall elliptic-relaxation eddy-viscosity turbulence model for CFD},
-  publisher       = {Elsevier},
-  year            = {2004},
-  journaltitle    = {International Journal of Heat and Fluid Flow},
-  volume          = {25},
-  pages           = {1047--1051},
 }
 
 @Book{ numerical_analysis_of_de_aiserles,
