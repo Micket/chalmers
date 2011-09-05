@@ -179,6 +179,9 @@
  % Check and set up biblatex
  \@ifpackageloaded{biblatex}{
   \defbibheading{bibliography}[\refname]{\addcontentsline{toc}{chapter}{#1}\chapter*{#1}} % Sets the heading for the bibliography
+  \newbibmacro{shortjournal}{\iffieldundef{shortjournal}
+   {\usebibmacro{journal}}%
+   {\printfield[journaltitle]{shortjournal}}} % Adds a default shortjournal
   }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
 
  % Figure captions
@@ -347,7 +350,7 @@
   %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   %\def\titlepage@logotype{Avancez_gold}
   % These colors are taken from the example covers, might lighter colors (looks closer to the printed version).
-  \def\titlepage@bg{\fill[red] (0,0) rectangle (\paperwidth,0.25\paperheight);}
+  \def\titlepage@bg{\fill[chalmers_lightblue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_lightgold}
   \def\titlepage@chagu{Cha_GU_white_eng}
   \def\thesisname{\doctoratethesisname}
@@ -406,12 +409,12 @@
  \end{flushright}
  \vspace*{5em}
  {\noindent\Large\textbf{#1}\par}
- \vspace*{2em}
- \begin{center}
- \begin{minipage}{0.8\textwidth}
-   {\noindent\large#2\par}
- \end{minipage}
- \end{center}
+%  \vspace*{2em}
+%  \begin{center}
+%  \begin{minipage}{0.8\textwidth}
+%    {\noindent\large#2\par}
+%  \end{minipage}
+%  \end{center}
  \newpage
 }
 
@@ -563,7 +566,11 @@
   \countryname\\
   \telephonename: \@telephone\par}
  \vspace*{\stretch{2}}
- \@ifundefined{@covercaption}{}{{\noindent \covername:\\ \@covercaption\par}}
+ \@ifundefined{@covercaption}{
+  \@ifundefined{@coverfigure}{}{\ClassWarning{chalmers-thesis}{Cover figure without caption!}{Cover figure should have a caption.}}
+  }{{\noindent \covername:\\ \@covercaption\par}
+  \@ifundefined{@coverfigure}{\ClassWarning{chalmers-thesis}{Caption without cover figure!}{Captions require cover images.}}{}
+ }
  \vskip 1em
  {\noindent \@printers
   \\ \cityname, \countryname\ \@copyrightyear\par}

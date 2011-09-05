@@ -17,9 +17,12 @@
 \documentclass[masters,a4paper]{chalmers-thesis}
 % All options are; doctorate, licentiate, masters, bachelors, nocover, draft, g5paper,
 % and everything the standard report class support.
-
-\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
-\usepackage{microtype} % Magically improves typesetting for pdflatex
+\usepackage{ifluatex} % Automatic check for luatex.
+\ifluatex
+ \usepackage{fontspec}
+\else
+ \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
+\fi\usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
 \usepackage{hyperref} % Required for in document links and document metadata.
 \usepackage[swedish, english]{babel}
@@ -68,6 +71,24 @@
 % You can add extra contents such as abbreviations and nomenclature using.
 % Use \presectiontitle to render add titles to new sections.
 \extrafrontmatter{\presectiontitle{Nomenclature} \lipsum} % Optional
+
+% Other optional settings for biblatex;
+\DeclareFieldFormat[article]{title}{#1} % Removes quotes from article title
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}} % Makes volume print in bold.
+\renewbibmacro{in:}{} % Removes the "In:" from the journals field.
+\DeclareFieldFormat[article]{pages}{#1} % Removes the pp. before pages.
+% Adds short journal entries;
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{shortjournal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}{}{\newunit\printfield{series}\setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
+% End of optional citation modifications.
 
 \addbibresource{ExampleBib.bib} % New comnand, use if available
 %\bibliography{ExampleBib} % Legacy command

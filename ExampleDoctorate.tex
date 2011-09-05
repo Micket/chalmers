@@ -17,8 +17,12 @@
 \documentclass[doctorate,g5paper]{chalmers-thesis}
 % All options are; doctorate, licentiate, masters, bachelors, nocover, draft, g5paper,
 % and everything the standard report class support.
-
-\usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
+\usepackage{ifluatex} % Automatic check for luatex.
+\ifluatex
+ \usepackage{fontspec}
+\else
+ \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
+\fi
 \usepackage{microtype} % Magically improves typesetting for pdflatex
 \usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
 \usepackage{hyperref} % Required for in document links and document metadata.
@@ -26,7 +30,8 @@
 
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[firstinits=true, style=alphabetic]{biblatex} % Modern bibliography facilities
+\usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric)
+
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures, required for cover page
 \usepackage{subfig} % Subfloats
@@ -65,7 +70,7 @@ Nigeria
 
 % You should scale the figure according to textwidth and or paperheight.
 %\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
-\covercaption{Some explanation}
+%\covercaption{Some explanation}
 
 \firstabstract{\lipsum}
 %\secondabstract{swedish}{\lipsum}
@@ -80,8 +85,23 @@ Nigeria
 % Use \presectiontitle to render add titles to new sections.
 \extrafrontmatter{\presectiontitle{Nomenclature} \lipsum} % Optional
 
-%\DeclareFieldFormat[article]{title}{#1} % remove quotes from title
-%\DeclareNameFormat{default}{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}\usebibmacro{name:delim}} % Abbreivates the authors first name
+% Other optional settings for biblatex;
+\DeclareFieldFormat[article]{title}{#1} % Removes quotes from article title
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}} % Makes volume print in bold.
+\renewbibmacro{in:}{} % Removes the "In:" from the journals field.
+\DeclareFieldFormat[article]{pages}{#1} % Removes the pp. before pages.
+% Adds short journal entries;
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{shortjournal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}{}{\newunit\printfield{series}\setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
+% End of optional citation modifications.
 
 \addbibresource{ExampleBib.bib} % New comnand, use if available
 %\bibliography{ExampleBib} % Legacy command
@@ -108,7 +128,7 @@ Nigeria
 \printbibliography % This command is new in biblatex. Do not attempt to use style files as with old latex.
 
 \part{Appended Papers A--B}
-% You can write this manually \paper{Paper Title}{Citation} or have bib entries entered automatically
+% You can write this manually \paper{Paper Title}{Full reference} or have bib entries entered automatically
 % \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 %\includepdf[pages=-]{papera.pdf}
