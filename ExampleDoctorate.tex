@@ -30,14 +30,14 @@
 
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric)
+\usepackage[firstinits=true, style=alphabetic, backend=bibtex]{biblatex} % Modern bibliography facilities (you may change style to numeric)
 
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures, required for cover page
 \usepackage{subfig} % Subfloats
 
 % Read the manuals for the respective package to see the usage;
-%\usepackage{pdfpages} % For included other pdf files (like articles).
+\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
@@ -131,9 +131,9 @@ Nigeria
 % You can write this manually \paper{Paper Title}{Full reference} or have bib entries entered automatically
 % \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\blindtext}
 \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
-%\includepdf[pages=-]{papera.pdf}
+%\includepdf[pages=-,width=\paperwidth]{ExampleMasters.pdf} % You could use subfiles here instead.
 
 \paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
-% \includepdf[pages=-]{paperb.pdf}
+% \includepdf[pages=-,width=\paperwidth]{paperb.pdf}
 
 \end{document}
