@@ -399,8 +399,8 @@
  \fi
  % Links are always nice;
  \hypertarget{paper:\papernumber{paper}}{\mbox{}}
- \phantomsection
- \addcontentsline{toc}{chapter}{Paper \papernumber{paper}}
+ %\phantomsection
+ %\addcontentsline{toc}{chapter}{Paper \papernumber{paper}}
  %\belowpdfbookmark{Paper \papernumber{paper}}{paper:\papernumber{paper}}
  \thispagestyle{empty}
  \vspace*{0em}
