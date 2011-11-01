@@ -106,6 +106,8 @@ Nigeria
 \addbibresource{ExampleBib.bib} % New command, use if available
 %\bibliography{ExampleBib} % Legacy command
 
+\setlength{\topcolumn}{0.22\textwidth} % Column for "Thesis" page which might need adjustments if there is other publications.
+
 \begin{document}
 % \makethesisdefence % Should be printed at a5paper size
 % \end{document}
@@ -135,5 +137,9 @@ Nigeria
 
 \paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
 % \includepdf[pages=-,width=\paperwidth]{paperb.pdf}
+
+\part{Other Publications} % If applicable:
+\toptext{Other publications related to thesis}
+\publication{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 
 \end{document}
