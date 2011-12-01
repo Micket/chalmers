@@ -783,7 +783,7 @@
   \vspace{0.1\textheight}
   {\Large\textbf{\@title} \par}
   \vspace{1em}
-  {\large \@subtitle \par}
+  \@ifundefined{@subtitle}{}{{\large \@subtitle \par}}
   \vspace{2em}
   {\renewcommand{\and}{\\}\large \textsc{\@author}\par}
   \vspace{\stretch{1}}
