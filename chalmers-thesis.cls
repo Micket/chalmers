@@ -16,6 +16,7 @@
 
 %% User commands
 % \paper{title}{reference}
+% \refpaper{paper numer}              - E.g. \refpaper{A}
 % \tableofpapers                      - Called by \maketitle
 % \topentry{title}{reference}         - Called by \tableofpapers
 % \papernumber                        - Defined to \Alph (can be redefined)
@@ -432,6 +433,9 @@
 %  \end{center}
  \newpage
 }
+
+% Convenient hyperlinked reference for the introduction text. Usage: \refpaper{A}
+\newcommand{\refpaper}[1]{\hyperlink{\papername:{#1}}{\papername~{#1}}}
 
 % Very similar command to \paper, for additional publications.
 \newcommand{\publication}[2]{
