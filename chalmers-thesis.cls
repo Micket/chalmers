@@ -175,7 +175,7 @@
   \numberwithin{equation}{section}
   \numberwithin{figure}{section}
   \numberwithin{table}{section}
- }{\ClassWarning{chalmers-thesis}{Package 'amsmath' strongly recommended.}{}}
+ }{\ClassWarning{chalmers-thesis}{Package 'amsmath' strongly recommended.}}
 
  % Check and set up biblatex
  \@ifpackageloaded{biblatex}{
@@ -183,16 +183,16 @@
   \newbibmacro{shortjournal}{\iffieldundef{shortjournal}
    {\usebibmacro{journal}}%
    {\printfield[journaltitle]{shortjournal}}} % Adds a default shortjournal
-  }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
+  }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}}
 
  % Figure captions
  \@ifpackageloaded{subfig}{
   \captionsetup[subfigure]{textfont=it}
- }{\ClassWarning{chalmers-thesis}{Package 'subfig' strongly recommended}{}}
+ }{\ClassWarning{chalmers-thesis}{Package 'subfig' strongly recommended}}
 
  \@ifpackageloaded{caption}{
   \captionsetup[figure]{textfont=it}
- }{\ClassWarning{chalmers-thesis}{Package 'caption' required}{}}
+ }{\ClassWarning{chalmers-thesis}{Package 'caption' required}}
 
 
  % Check for babel and add more translations
@@ -258,7 +258,7 @@
     linkcolor  = black,
     filecolor  = black,
   }
- }{\ClassWarning{chalmers-thesis}{Package 'hyperref' required}{}}
+ }{\ClassWarning{chalmers-thesis}{Package 'hyperref' required}}
 }
 
 % Needs to be at the end since its language dependent.
@@ -620,9 +620,9 @@
   \telephonename: \@telephone\par}
  \vspace*{\stretch{2}}
  \@ifundefined{@covercaption}{
-  \@ifundefined{@coverfigure}{}{\ClassWarning{chalmers-thesis}{Cover figure without caption!}{Cover figure should have a caption.}}
+  \@ifundefined{@coverfigure}{}{\ClassWarning{chalmers-thesis}{Cover figure without caption!}}
   }{{\noindent \covername:\\ \@covercaption\par}
-  \@ifundefined{@coverfigure}{\ClassWarning{chalmers-thesis}{Caption without cover figure!}{Captions require cover images.}}{}
+  \@ifundefined{@coverfigure}{\ClassWarning{chalmers-thesis}{Caption without cover figure!}}{}
  }
  \vskip 1em
  {\noindent \@printers
