@@ -172,10 +172,10 @@
 
  % Check for amsmath
  \@ifpackageloaded{amsmath}{
-  \numberwithin{equation}{section}
-  \numberwithin{figure}{section}
-  \numberwithin{table}{section}
- }{\ClassWarning{chalmers-thesis}{Package 'amsmath' strongly recommended.}}
+  %\numberwithin{equation}{section}
+  %\numberwithin{figure}{section}
+  %\numberwithin{table}{section}
+ }{\ClassWarning{chalmers-thesis}{Package 'amsmath' strongly recommended.}{}}
 
  % Check and set up biblatex
  \@ifpackageloaded{biblatex}{
@@ -183,16 +183,16 @@
   \newbibmacro{shortjournal}{\iffieldundef{shortjournal}
    {\usebibmacro{journal}}%
    {\printfield[journaltitle]{shortjournal}}} % Adds a default shortjournal
-  }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}}
+  }{\ClassWarning{chalmers-thesis}{Package 'biblatex' strongly recommended}{}}
 
  % Figure captions
  \@ifpackageloaded{subfig}{
   \captionsetup[subfigure]{textfont=it}
- }{\ClassWarning{chalmers-thesis}{Package 'subfig' strongly recommended}}
+ }{\ClassWarning{chalmers-thesis}{Package 'subfig' strongly recommended}{}}
 
  \@ifpackageloaded{caption}{
   \captionsetup[figure]{textfont=it}
- }{\ClassWarning{chalmers-thesis}{Package 'caption' required}}
+ }{\ClassWarning{chalmers-thesis}{Package 'caption' required}{}}
 
 
  % Check for babel and add more translations
@@ -258,7 +258,7 @@
     linkcolor  = black,
     filecolor  = black,
   }
- }{\ClassWarning{chalmers-thesis}{Package 'hyperref' required}}
+ }{\ClassWarning{chalmers-thesis}{Package 'hyperref' required}{}}
 }
 
 % Needs to be at the end since its language dependent.
@@ -431,11 +431,11 @@
 %    {\noindent\large#2\par}
 %  \end{minipage}
 %  \end{center}
- \newpage
+ \cleardoublepage
 }
 
 % Convenient hyperlinked reference for the introduction text. Usage: \refpaper{A}
-\newcommand{\refpaper}[1]{\hyperlink{\papername:{#1}}{\papername~{#1}}}
+\newcommand{\refpaper}[1]{\hyperlink{\papername:#1}{\papername~{#1}}}
 
 % Very similar command to \paper, for additional publications.
 \newcommand{\publication}[2]{
@@ -620,9 +620,9 @@
   \telephonename: \@telephone\par}
  \vspace*{\stretch{2}}
  \@ifundefined{@covercaption}{
-  \@ifundefined{@coverfigure}{}{\ClassWarning{chalmers-thesis}{Cover figure without caption!}}
+  \@ifundefined{@coverfigure}{}{\ClassWarning{chalmers-thesis}{Cover figure without caption!}{Cover figure should have a caption.}}
   }{{\noindent \covername:\\ \@covercaption\par}
-  \@ifundefined{@coverfigure}{\ClassWarning{chalmers-thesis}{Caption without cover figure!}}{}
+  \@ifundefined{@coverfigure}{\ClassWarning{chalmers-thesis}{Caption without cover figure!}{Captions require cover images.}}{}
  }
  \vskip 1em
  {\noindent \@printers
@@ -798,9 +798,19 @@
     Licentiate of Engineering
    \fi in \@thesisin\ at the \@department, \universityname, \cityname, \countryname\par}
   \vspace{\stretch{1}}
-  {To be defended in public, \@oppositiondate \par}
+  {To be 
+   \if@doctorate
+    defended
+   \else
+    presented
+   \fi
+   in public, \@oppositiondate \par}
   \vspace{\stretch{1}}
-  {Faculty opponent\\ \@opponent \par}
+  {\if@doctorate
+    Faculty opponent
+   \else
+    Invited discussions leader
+   \fi\\ \@opponent \par}
   \vspace{\stretch{1}}
   {\@department\\
    \universityname\\
