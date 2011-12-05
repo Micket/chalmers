@@ -4,12 +4,12 @@
 %% Thesis class template for Chalmers University of Technology.
 %% Written by Mikael Öhman <mikael.ohman@chalmers.se>
 %% This document is released under public domain, but the chalmers logo is trademarked.
-%% Some words are translated to swedish if babel langauge is set, otherwise default to English
+%% Some words are translated to swedish if babel language is set, otherwise default to English
 
 %% Class options;
 % doctorate, licentiate, masters, bachelors, techreport - Sets the type of thesis accordingly
 % nocover - Do not print the cover in \maketitle.
-% draft - Makes \maketitle more compact, skipping unecessary blanks
+% draft - Makes \maketitle more compact, skipping unnecessary blanks
 % g5paper - Sets the paper dimensions to 239mm * 169mm
 % gu - Joint work for Chalmers + GU
 % All options are also passed the standard report class.
@@ -17,6 +17,8 @@
 %% User commands
 % \paper{title}{reference}
 % \refpaper{paper numer}              - E.g. \refpaper{A}
+% \makethesisdefence                  - Typesets the invitation paper to the thesis defence.
+% \maketitle                          - Typesets the frontmatter for the thesis.
 % \tableofpapers                      - Called by \maketitle
 % \topentry{title}{reference}         - Called by \tableofpapers
 % \papernumber                        - Defined to \Alph (can be redefined)
