@@ -811,7 +811,7 @@
   {\if@doctorate
     Faculty opponent
    \else
-    Invited discussions leader
+    Invited discussion leader
    \fi\\ \@opponent \par}
   \vspace{\stretch{1}}
   {\@department\\
