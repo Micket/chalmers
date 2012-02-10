@@ -221,7 +221,7 @@
  
   \addto\captionsenglish{%
    \def\countryname{Sweden}%
-   \def\cityname{Gothenburg}%
+   \def\cityname{G\"oteborg}%Gothenburg}%
    \def\telephonename{Telephone}%
    \def\universityname{Chalmers University of Technology}%
    \def\seconduniversityname{University of Gothenburg}%
