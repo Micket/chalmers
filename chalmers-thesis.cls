@@ -144,7 +144,7 @@
 \RequirePackage{titlesec}
 \titleclass{\chapter}{straight}
 \newcommand{\chapterbreak}{}
-\titleformat{\chapter}[hang]{\bfseries\huge}{\thechapter\quad}{0em}{}
+\titleformat{\chapter}[hang]{\bfseries\LARGE}{\thechapter\quad}{0em}{}
 \titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
 % Parts should start a new right side page;
