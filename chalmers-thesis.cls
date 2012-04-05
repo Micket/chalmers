@@ -238,6 +238,12 @@
    \def\papername{Paper}%
    \def\publicationname{Publication}%
   }
+
+  \@ifpackageloaded{siunitx}{
+   \addto\extrasswedish{\sisetup{locale = DE}} % German is close to Swedish for units.
+   \addto\extrasenglish{\sisetup{locale = US}}
+  }{}
+
  }{\ClassError{chalmers-thesis}{Package 'babel' required}{}}
  
  % Document metadata setup
