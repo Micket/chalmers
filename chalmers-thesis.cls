@@ -675,7 +675,7 @@
  \@checkifdefined{secondarylanguage}
  \@checkifdefined{secondabstract}
  \newpage
- \begin{Otherlanguage}{swedish}
+ \begin{Otherlanguage}{\@secondarylanguage}
   \presectiontitle{\abstractname}
   \@secondabstract
  \end{Otherlanguage}
