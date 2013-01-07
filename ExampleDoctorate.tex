@@ -31,18 +31,17 @@
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
 \usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric). change to old bibtex if you insist on using that.
-
 \usepackage{mathtools} % All your math related needs
-\usepackage{tikz} % Draw figures, required for cover page
+\usepackage{tikz} % Draw figures. Required for cover page
 \usepackage{subfig} % Subfloats
 
 % Read the manuals for the respective package to see the usage;
-\usepackage{pdfpages} % For included other pdf files (like articles).
+%\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 %\usepackage{booktabs} % High quality tables.
-%\usepackage{siunitx} % For all your numerical values and units. 
+%\usepackage{siunitx} % For all your numerical values and units.
 %\usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
 %\usepackage{contmech} % Custom package for typesetting in continuum mechanics for applied mechanics.
 %\usepackage{yourcustomcommands} % Put your custom commands in a file 'yourcustomcommands.sty' and load it like this.
@@ -69,14 +68,14 @@ Nigeria
 \oppositiondate{10.00 am, 30\textsuperscript{th} May, 2011 in HA2 Hörsalsvägen 4, Göteborg}
 
 % You should scale the figure according to textwidth and or paperheight.
-%\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
-%\covercaption{Some explanation}
+\coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/ExampleCover}}
+\covercaption{Some explanation}
 
 \firstabstract{\lipsum}
-%\secondabstract{swedish}{\lipsum}
+%\secondabstract{swedish}{\lipsum} % Optional
 \keywords{Some stuff, More stuff, Stuff}
 
-\preface{\lipsum}
+\preface{\lipsum} % You can use \input to put preface and acknowledgements in another document
 \acknowledgements{\lipsum}
 \dedication{\textit{to my dear mother.}}
 \paperwork{\lipsum}
@@ -106,11 +105,11 @@ Nigeria
 \addbibresource{ExampleBib.bib} % New command, use if available
 %\bibliography{ExampleBib} % Legacy command
 
-\setlength{\topcolumn}{0.22\textwidth} % Column for "Thesis" page which might need adjustments if there is other publications.
+% \setlength{\topcolumn}{0.22\textwidth} % Column for "Thesis" page which might need adjustments if there is other publications.
 
 \begin{document}
 % \makethesisdefence % Should be printed at a5paper size
-% \end{document}
+% \end{document }
 \maketitle
 % If you need to do any modifications, you can redefine each page respectively, or just call them manually as;
 %\makecoverpage
@@ -126,20 +125,25 @@ Nigeria
 
 \part{Extended Summary} % Using the starred command avoids numbering.
 \subfile{ExampleIntroduction}
+%\subfile{Introduction}
+%\subfile{Theory}
+%\subfile{Method}
+%\subfile{Results}
+
 \nocite{*} % Cites everything from the bibliography
 \printbibliography % This command is new in biblatex. Do not attempt to use style files as with old latex.
 
-\part{Appended Papers A--B}
-% You can write this manually \paper{Paper Title}{Full reference} or have bib entries entered automatically
-% \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\lipsum}
-\paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
-%\includepdf[pages=-,width=\paperwidth]{ExampleMasters.pdf} % You could use subfiles here instead.
-
-\paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
-% \includepdf[pages=-,width=\paperwidth]{paperb.pdf}
-
-\part{Other Publications} % If applicable:
-\toptext{Other publications related to thesis}
-\publication{\citefield{paper:A}{title}}{\fullcite{paper:A}}
+% \part{Appended Papers A--B}
+% % You can write this manually \paper{Paper Title}{Full reference} or have bib entries entered automatically
+% % \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\lipsum}
+% \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
+% %\includepdf[pages=-,width=\paperwidth]{ExampleMasters.pdf} % You could use subfiles here instead.
+% 
+% \paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}
+% % \includepdf[pages=-,width=\paperwidth]{paperb.pdf}
+% 
+% \part{Other Publications} % If applicable:
+% \toptext{Other publications related to thesis}
+% \publication{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 
 \end{document}
