@@ -1,4 +1,5 @@
 % If you find something odd, wrong or lacking, you can email me at; Mikael Öhman <mikael.ohman@chalmers.se>
+% But *please* do NOT email me about standard latex questions, but only things specific to the chalmers-thesis document class.
 % This file has been distributed through: http://www.github.com/Micket/chalmers
 
 %% Thesis class template for Chalmers University of Technology.
