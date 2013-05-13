@@ -15,7 +15,7 @@
 
 % change doctorate to licentiate if necessary
 \documentclass[doctorate,g5paper]{chalmers-thesis}
-% All options are; doctorate, licentiate, masters, bachelors, nocover, draft, g5paper,
+% All options are; doctorate, licentiate, masters, bachelors, techreport, projectreport, nocover, draft, g5paper,
 % and everything the standard report class support.
 \usepackage{ifluatex} % Automatic check for luatex.
 \ifluatex
@@ -136,7 +136,7 @@ Nigeria
 % \part{Appended Papers A--B}
 % % You can write this manually \paper{Paper Title}{Full reference} or have bib entries entered automatically
 % % \paper{A study of multiple crack interaction at rolling contact fatigue of rails}{\lipsum}
-% \paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
+\paper{\citefield{paper:A}{title}}{\fullcite{paper:A}}
 % %\includepdf[pages=-,width=\paperwidth]{ExampleMasters.pdf} % You could use subfiles here instead.
 % 
 % \paper{\citefield{paper:B}{title}}{\fullcite{paper:B}}

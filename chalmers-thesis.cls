@@ -92,6 +92,7 @@
 \newif\if@licentiate
 \newif\if@doctorate
 \newif\if@techreport
+\newif\if@projectreport
 \newif\if@university
 \newif\if@bachelorsormasters
 \newif\if@cover
@@ -104,6 +105,7 @@
 \@licentiatefalse
 \@doctoratefalse
 \@techreportfalse
+\@projectreportfalse
 \@bachelorsormastersfalse
 \@covertrue
 \@draftfalse
@@ -113,15 +115,17 @@
 %% Options of class
 % bachelors, masters, licentiate, doctorate, nocover, g5paper
 \DeclareOption{bachelors}{\global\@bachelorstrue
-  \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse}
+  \global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse\global\@projectreportfalse}
 \DeclareOption{masters}{\global\@masterstrue
-  \global\@bachelorsfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse}
+  \global\@bachelorsfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse\global\@projectreportfalse}
 \DeclareOption{licentiate}{\global\@licentiatetrue
-  \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse\global\@techreportfalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@doctoratefalse\global\@techreportfalse\global\@projectreportfalse}
 \DeclareOption{doctorate}{\global\@doctoratetrue
-  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@techreportfalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@techreportfalse\global\@projectreportfalse}
 \DeclareOption{techreport}{\global\@techreporttrue
-  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse}
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse\global\@projectreportfalse}
+\DeclareOption{projectreport}{\global\@projectreporttrue
+  \global\@bachelorsfalse\global\@mastersfalse\global\@licentiatefalse\global\@doctoratefalse\global\@techreportfalse}
 \DeclareOption{gu}{\global\@universitytrue}
 \DeclareOption{nocover}{\global\@coverfalse}
 \DeclareOption{draft}{\global\@drafttrue\global\@coverfalse}
@@ -208,6 +212,7 @@
    \def\covername{Omslag}%
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
+   \def\projectthesisname{Projekt}%
    \def\masterthesisname{Examensarbete}%
    \def\bachelorsthesisname{Kandidatarbete}%
    \def\licentiatethesisname{Licentiatavhandling}%
@@ -228,6 +233,7 @@
    \def\covername{Cover}%
    \def\acknowledgementsname{Acknowledgements}%
    \def\keywordsname{Keywords}%
+   \def\projectthesisname{Project}%
    \def\masterthesisname{Master's thesis}%
    \def\bachelorsthesisname{Bachelor's thesis}%
    \def\licentiatethesisname{Thesis for the degree of Licentiate of Engineering}%
@@ -375,6 +381,10 @@
   \def\titlepage@logotype{Avancez_white}
   \def\titlepage@chagu{Cha_GU_bluewhite_eng}
   \def\thesisname{\techreportname}
+  \def\@reportseries{\thesisname}
+\fi
+\if@projectreport
+  \def\thesisname{\projectthesisname}
   \def\@reportseries{\thesisname}
 \fi
 
@@ -647,7 +657,6 @@
  \@checkifdefined{keywords}
 
  \newpage
- \pagenumbering{roman}
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
   \thesisname\ \inname\ \@thesisin\\
@@ -741,6 +750,7 @@
   \makeprintinfopage
  \fi
 
+ \pagenumbering{roman}
  \makeabstractpage\pagestyle{plain}
 
  % Empty or second abstract
@@ -785,6 +795,34 @@
  \fi
  \pagenumbering{arabic}
 }
+
+\if@projectreport
+  \renewcommand{\maketitle}{%
+   \setcounter{page}{-99} % Necessary to give the first pages a unique identifier using hyperref.
+   \maketitlepage
+   \cleardoublepage
+
+ % Preface and acknowledgements
+ \@ifundefined{@preface}{}{
+  \makeprefacepage
+ }
+ \@ifundefined{@acknowledgements}{}{
+  \makeacknowledgementspage
+ }
+
+ \@ifundefined{@extrafrontmatter}{}{
+  \cleardoublepage
+  \@extrafrontmatter
+ }
+
+   \cleardoublepage
+   \pagenumbering{roman}
+   \pagestyle{plain}
+   \tableofcontents
+   \cleardoublepage
+   \pagenumbering{arabic}
+  }
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Page + abstract for defence of thesis.
