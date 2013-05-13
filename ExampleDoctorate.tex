@@ -1,6 +1,8 @@
 % This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 % If you find something odd, wrong or lacking, you can email me at; Mikael Öhman <mikael.ohman@chalmers.se>
+% But *please* do NOT email me about standard latex questions, but only things specific to the document class.
+% I.e. do not ask me about any of the packages included in this example file. Read the manuals for each respective package.
 % This file has been distributed through: http://www.github.com/Micket/chalmers
 
 % These manuals are a *must* read. They are all full of good examples;
@@ -10,6 +12,7 @@
 % booktabs  - http://mirror.ctan.org/macros/latex/contrib/booktabs/booktabs.pdf
 % http://www.ctan.org/tex-archive/help/Catalogue/bytopic.html
 % http://en.wikibooks.org/wiki/LaTeX/
+% See chalmers-thesis.cls for the documentation on this actual template.
 
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
@@ -24,13 +27,14 @@
  \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
 \fi
 \usepackage{microtype} % Magically improves typesetting for pdflatex
-\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
+%\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
 \usepackage{hyperref} % Required for in document links and document metadata.
 \usepackage[swedish, english]{babel}
 
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric). change to old bibtex if you insist on using that.
+% Biblatex allows you to choose backend, either the ancient "bibtex", or the modern "biber". biber is better.
+\usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric). Change to old bibtex if you insist on using that.
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures. Required for cover page
 \usepackage{subfig} % Subfloats
@@ -124,7 +128,7 @@ Nigeria
 %\cleardoublepage\pagenumbering{arabic}
 
 \part{Extended Summary} % Using the starred command avoids numbering.
-\subfile{ExampleIntroduction}
+%\subfile{ExampleIntroduction}
 %\subfile{Introduction}
 %\subfile{Theory}
 %\subfile{Method}

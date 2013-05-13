@@ -1,6 +1,8 @@
 % This is an example on how to use the chalmers-thesis document class.
 % Document should be compiled with pdflatex or lualatex
 % If you find something odd, wrong or lacking, you can email me at; Mikael Öhman <mikael.ohman@chalmers.se>
+% But *please* do NOT email me about standard latex questions, but only things specific to the chalmers-thesis document class.
+% I.e. do not ask me about any of the packages included in this example file. Read the manuals for the packages.
 % This file has been distributed through: http://www.github.com/Micket/chalmers
 
 % These manuals are a *must* read. They are all full of good examples;
@@ -10,6 +12,7 @@
 % booktabs  - http://mirror.ctan.org/macros/latex/contrib/booktabs/booktabs.pdf
 % http://www.ctan.org/tex-archive/help/Catalogue/bytopic.html
 % http://en.wikibooks.org/wiki/LaTeX/
+% See chalmers-thesis.cls for the documentation on this actual template.
 
 \RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
@@ -30,7 +33,8 @@
 
 % More or less required packages
 \usepackage{csquotes} % Needed for biblatex
-\usepackage[firstinits=true, style=alphabetic]{biblatex} % Modern bibliography facilities
+% Biblatex allows you to choose backend, either the old "bibtex", or the new "biber".
+\usepackage[firstinits=true, style=alphabetic, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric)
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures. Required for cover page
 \usepackage{subfig} % Subfloats
