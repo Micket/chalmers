@@ -327,6 +327,8 @@
 \printers{Chalmers Reproservice}
 \telephone{+46 (0)31-772 1000}
 
+\reportno{}
+
 % Thesis specific settings
 \if@bachelors
   \global\@bachelorsormasterstrue
@@ -629,8 +631,9 @@
  \vskip 2em
  {\noindent \copyright\ {\renewcommand{\and}{, }\MakeUppercase{\@author}}, \@copyrightyear\par}
  \vskip 2em
- {\noindent \@reportseries\ \@reportno\\
-  ISSN \@ISSN\\
+ {\noindent% 
+  \ifdefempty{\@reportno}{}{\@reportseries\ \@reportno\\}%
+  \ifdefempty{\@ISSN}{}{ISSN \@ISSN\\}%
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
   \universityname\\
