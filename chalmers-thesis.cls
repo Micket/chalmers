@@ -209,7 +209,7 @@
    \def\cityname{G\"oteborg}%
    \def\telephonename{Telefon}%
    \def\universityname{Chalmers tekniska h\"ogskola}%
-   \def\seconduniversityname{Göteborgs universitet}%
+   \def\seconduniversityname{G\"oteborgs universitet}%
    \def\covername{Omslag}%
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
