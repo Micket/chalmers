@@ -209,7 +209,7 @@
    \def\cityname{G\"oteborg}%
    \def\telephonename{Telefon}%
    \def\universityname{Chalmers tekniska h\"ogskola}%
-   \def\seconduniversityname{Göteborgs universitet}%
+   \def\seconduniversityname{G\"oteborgs universitet}%
    \def\covername{Omslag}%
    \def\acknowledgementsname{Tacks\"agelse}%
    \def\keywordsname{Nyckelord}%
@@ -326,6 +326,8 @@
 \postcode{SE-412 96}
 \printers{Chalmers Reproservice}
 \telephone{+46 (0)31-772 1000}
+
+\reportno{}
 
 % Thesis specific settings
 \if@bachelors
@@ -629,8 +631,9 @@
  \vskip 2em
  {\noindent \copyright\ {\renewcommand{\and}{, }\MakeUppercase{\@author}}, \@copyrightyear\par}
  \vskip 2em
- {\noindent \@reportseries\ \@reportno\\
-  ISSN \@ISSN\\
+ {\noindent% 
+  \ifdefempty{\@reportno}{}{\@reportseries\ \@reportno\\}%
+  \ifdefempty{\@ISSN}{}{ISSN \@ISSN\\}%
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
   \universityname\\
@@ -751,6 +754,7 @@
   \makeprintinfopage
  \fi
 
+ \newpage
  \pagenumbering{roman}
  \makeabstractpage\pagestyle{plain}
 
