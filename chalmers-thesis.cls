@@ -555,7 +555,7 @@
  \begin{center}
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
- {\huge\noindent\@title\par} % title, 21
+ {\raggedright\huge\noindent\@title\par} % title, 21
  \@ifundefined{@subtitle}{}{{\Large\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
  {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
