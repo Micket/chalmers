@@ -17,6 +17,7 @@
 
 %% User commands
 % \paper{title}{reference}
+% \publication{title}{reference}      - For publications that are not journal papers.
 % \refpaper{paper numer}              - E.g. \refpaper{A}
 % \makethesisdefence                  - Typesets the invitation paper to the thesis defence.
 % \maketitle                          - Typesets the frontmatter for the thesis.
@@ -524,9 +525,7 @@
 
 % Introducing some new lengths for the front page
 \newlength{\headerheight}
-\newlength{\headeroffset}
-\setlength{\headerheight}{0.215\paperheight}%~6.4cm in a4
-\setlength{\headeroffset}{0.125\headerheight}%~0.8cm in a4
+\setlength{\headerheight}{0.18812\paperheight}%~5.6cm in a4
 
 \AtEndPreamble{
 \@ifpackageloaded{tikz}{
@@ -535,15 +534,13 @@
  \begin{tikzpicture}[remember picture,overlay]
   \node[yshift=-\headerheight] at (current page.north west)
    {\begin{tikzpicture}[remember picture, overlay]
-     \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0.75\paperwidth,0)
-                 .. controls (0.725\paperwidth,0) and (0.725\paperwidth,\headeroffset) ..
-                 (0.70\paperwidth,\headeroffset) -- (0,\headeroffset) -- cycle; % (0.5\paperwidth,\headeroffset) to[out=0,in=180] (0.6\paperwidth,0cm);
+     \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0,0) -- cycle;
      \titlepage@bg
      \if@university
       \node[anchor=west,xshift=0.1\paperwidth,yshift=0.55\headerheight,inner sep=0]{\includegraphics[width=0.8\paperwidth]{figures/\titlepage@chagu}};
      \else
-      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.63\paperwidth}}; % 13.2cm for A4 paper
-      \node[anchor=west,xshift=0.745\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.16\paperwidth]{figures/\titlepage@logotype}};
+      \node[anchor=west,xshift=0.28\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.55\paperwidth}}; % 13.2cm for A4 paper
      \fi
    \end{tikzpicture}};
    \if@university
@@ -555,15 +552,16 @@
  \begin{center}
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
- {\raggedright\huge\noindent\@title\par} % title, 21
+ {\raggedright\huge\bfseries\sffamily\noindent\@title\par} % title, 21
  \@ifundefined{@subtitle}{}{{\Large\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
  {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \fi
  \vskip 1.5em
- {\renewcommand{\and}{\\}\Large\noindent \MakeUppercase{\@author}\par}% 18
- \vskip 1.5em
- {\small\noindent\@department\\
+ {\renewcommand{\and}{\\}\Large\sffamily\noindent \MakeUppercase{\@author}\par}% 18
+ \hspace{-0.5em}\rule{1.05\linewidth}{0.5pt}
+ \vskip 1.em
+ {\small\sffamily\noindent\@department\\
   \@ifundefined{@division}{}{\textit{\@division}\\}
   \MakeUppercase{\universityname}\\
   \if@university
