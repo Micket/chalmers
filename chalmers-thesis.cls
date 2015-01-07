@@ -553,23 +553,24 @@
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
  {\raggedright\huge\bfseries\sffamily\noindent\@title\par} % title, 21
- \@ifundefined{@subtitle}{}{{\Large\noindent\@subtitle\par}} % subtitle, 16
+ \@ifundefined{@subtitle}{}{{\Large\sffamily\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
- {\normalsize\noindent\textit{\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
+ {\normalsize\noindent{\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \fi
  \vskip 1.5em
  {\renewcommand{\and}{\\}\Large\sffamily\noindent \MakeUppercase{\@author}\par}% 18
  \hspace{-0.5em}\rule{1.05\linewidth}{0.5pt}
  \vskip 1.em
  {\small\sffamily\noindent\@department\\
-  \@ifundefined{@division}{}{\textit{\@division}\\}
+  %\@ifundefined{@division}{}{\textit{\@division}\\} % Not used anymore.
   \MakeUppercase{\universityname}\\
   \if@university
    \MakeUppercase{\seconduniversityname}\\
   \fi
   \cityname, \countryname\ \@copyrightyear
-  \if@bachelorsormasters
-    \\ \thesisname\ \@reportno \fi
+  % No longer printed on the new cover pages
+%   \if@bachelorsormasters
+%     \\ \thesisname\ \@reportno \fi
   \par}
 
  % Second page, blank
@@ -599,7 +600,7 @@
   {\renewcommand{\and}{\NoCaseChange{\\}}\MakeTextUppercase{\@author}\par}
   \vspace*{\stretch{3}}
   {\@department\par}
-  \@ifundefined{@division}{}{{\textit{\@division}\par}}
+  \@ifundefined{@division}{}{{\@division\par}}
   {\MakeUppercase{\universityname}
    \if@university
     \\\MakeUppercase{\seconduniversityname}
