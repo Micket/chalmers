@@ -334,9 +334,8 @@
 \if@bachelors
   \global\@bachelorsormasterstrue
   \ISSN{1654-4676}
-  \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
-  \def\titlepage@bg{}
+  \def\titlepage@bg{\draw[ultra thick] (0.1\paperwidth,0) -- (0.99\paperwidth,0);}
   \def\titlepage@logotype{Avancez_invert}
   \def\titlepage@chagu{Cha_GU_blue_eng}
   \def\thesisname{\bachelorsthesisname}
@@ -345,9 +344,8 @@
 \if@masters
   \global\@bachelorsormasterstrue
   \ISSN{1652-8557}
-  \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
-  \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
+  \def\titlepage@bg{\draw[ultra thick] (0.1\paperwidth,0) -- (0.99\paperwidth,0);}
   \def\titlepage@logotype{Avancez_white}
   \def\titlepage@chagu{Cha_GU_bluewhite_eng}
   \def\thesisname{\masterthesisname}
@@ -355,7 +353,6 @@
 \fi
 \if@licentiate
   \ISSN{1652-8565}
-  \def\titlepage@edge{}
   \def\titlepage@chalmerscolor{white}
   \def\titlepage@bg{\fill[chalmers_grey] (0,0) rectangle (\paperwidth,0.25\paperheight);}
   \def\titlepage@logotype{Avancez_black}
@@ -365,7 +362,6 @@
 \fi
 \if@doctorate
   \ISSN{0346-718X}
-  \def\titlepage@edge{}
   \def\titlepage@chalmerscolor{white}
   % The chalmers_blue is supposely the correct one, but it doesn't match at all.
   %\def\titlepage@bg{\fill[chalmers_blue] (0,0) rectangle (\paperwidth,0.25\paperheight);}
@@ -379,9 +375,8 @@
 \fi
 \if@techreport
   \ISSN{1652-8549}
-  \def\titlepage@edge{draw}
   \def\titlepage@chalmerscolor{black}
-  \def\titlepage@bg{\draw[step=5mm,black] (0,0) grid (\paperwidth,0.25\paperheight);}
+  \def\titlepage@bg{\draw[black] (0.1\paperwidth,0) -- (0.99\paperwidth,0);}
   \def\titlepage@logotype{Avancez_white}
   \def\titlepage@chagu{Cha_GU_bluewhite_eng}
   \def\thesisname{\techreportname}
@@ -525,7 +520,7 @@
 
 % Introducing some new lengths for the front page
 \newlength{\headerheight}
-\setlength{\headerheight}{0.18812\paperheight}%~5.6cm in a4
+\setlength{\headerheight}{0.13085\paperheight}%~5.6cm in a4
 
 \AtEndPreamble{
 \@ifpackageloaded{tikz}{
@@ -534,34 +529,34 @@
  \begin{tikzpicture}[remember picture,overlay]
   \node[yshift=-\headerheight] at (current page.north west)
    {\begin{tikzpicture}[remember picture, overlay]
-     \clip[\titlepage@edge] (0,\headerheight) -- +(\paperwidth,0) -- (\paperwidth,0) -- (0,0) -- cycle;
      \titlepage@bg
      \if@university
       \node[anchor=west,xshift=0.1\paperwidth,yshift=0.55\headerheight,inner sep=0]{\includegraphics[width=0.8\paperwidth]{figures/\titlepage@chagu}};
      \else
-      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.516\headerheight]{\includegraphics[width=0.16\paperwidth]{figures/\titlepage@logotype}};
-      \node[anchor=west,xshift=0.28\paperwidth,yshift=0.511\headerheight]{\chalmerslogo{\titlepage@chalmerscolor}{0.55\paperwidth}}; % 13.2cm for A4 paper
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.45\headerheight]{\includegraphics[width=0.884in]{figures/\titlepage@logotype}}; %width=0.107*8.262772in
+      \node[anchor=west,xshift=0.1\paperwidth,yshift=0.45\headerheight]{\hspace{1in}\chalmerslogo{\titlepage@chalmerscolor}{3.305in}}; % 13.2cm for A4 paper
      \fi
    \end{tikzpicture}};
-   \if@university
-    \node[anchor=south east,xshift=-0.1\paperwidth,yshift=0.1\paperheight,inner sep=0] at (current page.south east)
-     {\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
-   \fi
+   %\if@university
+   % \node[anchor=south east,xshift=-0.1\paperwidth,yshift=0.1\paperheight,inner sep=0] at (current page.south east)
+   %  {\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
+   %\fi
  \end{tikzpicture}
- \ \vfill
+ \ \vfill\vfill\vfill
  \begin{center}
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
- {\raggedright\huge\bfseries\sffamily\noindent\@title\par} % title, 21
- \@ifundefined{@subtitle}{}{{\Large\sffamily\noindent\@subtitle\par}} % subtitle, 16
+ {\raggedright\Huge\bfseries\sffamily\noindent\@title\par} % title, 21
+ \@ifundefined{@subtitle}{\vspace{1em}}{{\huge\sffamily\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
- {\normalsize\noindent{\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
+ {\large\noindent{\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \fi
  \vskip 1.5em
  {\renewcommand{\and}{\\}\Large\sffamily\noindent \MakeUppercase{\@author}\par}% 18
- \hspace{-0.5em}\rule{1.05\linewidth}{0.5pt}
- \vskip 1.em
- {\small\sffamily\noindent\@department\\
+ \vfill\vfill
+ \rule{0.89\paperwidth}{0.5pt}
+ \vskip 0.3em
+ {\normalsize\sffamily\noindent\@department\\
   %\@ifundefined{@division}{}{\textit{\@division}\\} % Not used anymore.
   \MakeUppercase{\universityname}\\
   \if@university
@@ -572,7 +567,7 @@
 %   \if@bachelorsormasters
 %     \\ \thesisname\ \@reportno \fi
   \par}
-
+ \vskip -4em
  % Second page, blank
  \newpage
  \mbox{}

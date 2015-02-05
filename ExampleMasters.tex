@@ -14,10 +14,10 @@
 % http://en.wikibooks.org/wiki/LaTeX/
 % See chalmers-thesis.cls for the documentation on this actual template.
 
-\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
+%\RequirePackage[l2tabu,orthodox]{nag} % This package helps prevent you from doing things wrong.
 
 % change masters to bachelors if necessary
-\documentclass[masters,a4paper]{chalmers-thesis}
+\documentclass[masters,university,a4paper]{chalmers-thesis}
 % All options are; doctorate, licentiate, masters, bachelors, techreport, projectreport, nocover, draft, g5paper,
 % and everything the standard report class support.
 \usepackage{ifluatex} % Automatic check for luatex.
@@ -27,7 +27,7 @@
  \usepackage[utf8]{inputenc} % File encoding, you should try to stick to utf8.
 \fi
 \usepackage{microtype} % Magically improves typesetting for pdflatex
-\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
+%\usepackage{subfiles} % Convenient use of subfiles in documents. Using \subfile is optional. See README
 \usepackage{hyperref} % Required for in document links and document metadata.
 \usepackage[swedish, english]{babel}
 
@@ -53,9 +53,9 @@
 
 % User commands
 \title{The Title of Your Thesis which might be very long}
-\subtitle{And Perhaps a Subtitle} % Optional
+%\subtitle{And Perhaps a Subtitle} % Optional
 \author{Some Author\and Other Author}
-\thesisin{Solid and Structural Mechanics}
+\thesisin{Applied Mechanics}
 \department{Department of Applied Mechanics}
 \division{Division of Solid Mechanics}
 \reportno{2011:01}
@@ -114,7 +114,7 @@
 
  % Sets up page numbering for the rest of the document.
 % Highly recommended to put contents into subfiles, or use \input.
-\subfile{ExampleIntroduction}
+%\subfile{ExampleIntroduction}
 %\subfile{Introduction}
 %\subfile{Theory}
 %\subfile{Method}
