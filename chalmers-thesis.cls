@@ -502,6 +502,7 @@
 \renewcommand{\tableofcontents}{
  %\phantomsection\addcontentsline{toc}{chapter}{\contentsname}\section*{\contentsname}
  \presectiontitle{\contentsname}
+ \ 
  \vskip 1em
  \@starttoc{toc}
  \vskip 1em
@@ -657,7 +658,6 @@
  \newpage
  {\noindent \@title\\
   \@ifundefined{@subtitle}{}{\@subtitle\\}
-  \thesisname\ \inname\ \@thesisin\\
    {\renewcommand{\and}{\\}\MakeUppercase{\@author}}\\
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
