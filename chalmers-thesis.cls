@@ -548,7 +548,7 @@
   \@ifundefined{@coverfigure}{}{\@coverfigure}
  \end{center}
  {\raggedright\Huge\bfseries\sffamily\noindent\@title\par} % title, 21
- \@ifundefined{@subtitle}{\vspace{1em}}{{\huge\sffamily\noindent\@subtitle\par}} % subtitle, 16
+ \@ifundefined{@subtitle}{\vspace{1em}}{{\raggedright\huge\sffamily\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
  {\large\noindent{\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \fi
